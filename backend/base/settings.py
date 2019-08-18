@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'notes',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -83,6 +85,12 @@ DATABASES = {
     }
 }
 
+# A list of origins that are authorized to make cross-site HTTP requests
+# Used with Django CORS
+CORS_ORIGIN_WHITELIST = ['http://localhost:8100', 'http://localhost:4200']
+
+# Specify the auth user model to be used
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
