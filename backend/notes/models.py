@@ -13,6 +13,7 @@ class Note(models.Model):
 class Project(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    title_slug = models.SlugField(unique=True)
     description = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 

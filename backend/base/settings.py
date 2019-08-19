@@ -41,10 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes',
-    'accounts'
+    'accounts',
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,6 +78,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'base.wsgi.application'
 
 
+# TODO: Change this for production
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -87,7 +97,9 @@ DATABASES = {
 
 # A list of origins that are authorized to make cross-site HTTP requests
 # Used with Django CORS
-CORS_ORIGIN_WHITELIST = ['http://localhost:8100', 'http://localhost:4200']
+CORS_ORIGIN_WHITELIST = []
+if ENV_ROLE == 'development':
+    CORS_ORIGIN_WHITELIST = ['http://localhost:8100', 'http://localhost:4200']
 
 # Specify the auth user model to be used
 AUTH_USER_MODEL = 'accounts.CustomUser'
