@@ -1,5 +1,9 @@
 import os
+from dotenv import load_dotenv
 from django.core.exceptions import ImproperlyConfigured
+
+# Load env variables
+load_dotenv()
 
 # Handling Key Import Errors
 def get_env_variable(var_name):
@@ -97,9 +101,10 @@ DATABASES = {
 
 # A list of origins that are authorized to make cross-site HTTP requests
 # Used with Django CORS
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = []
 if ENV_ROLE == 'development':
-    CORS_ORIGIN_WHITELIST = ['http://localhost:8100', 'http://localhost:4200']
+    CORS_ORIGIN_ALLOW_ALL = True
 
 # Specify the auth user model to be used
 AUTH_USER_MODEL = 'accounts.CustomUser'

@@ -19,7 +19,7 @@ export class NotesService {
      */
     loadNotes(): void {
         this.http
-            .get<Note[]>(`${API_URL}/api/notes`)
+            .get<Note[]>(`${API_URL}/api/notes/`)
             .subscribe(notes => this.notes.next(notes), error => this.notes.error(error));
     }
 
