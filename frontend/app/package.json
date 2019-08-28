@@ -10,7 +10,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "build-prod": "ionic build --prod && cp -r www ../backend/frontend/static"
+        "build-prod": "ionic build --prod"
     },
     "private": true,
     "dependencies": {

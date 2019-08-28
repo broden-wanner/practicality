@@ -130,16 +130,6 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -149,6 +139,7 @@ dmypy.json
 .pyre/
 
 # compiled output
+build/
 /dist
 /tmp
 /out-tsc
