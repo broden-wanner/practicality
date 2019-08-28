@@ -1,7 +1,4 @@
-# Specifies intentionally untracked files to ignore when using Git
-# http://git-scm.com/docs/gitignore
-
-## NPM ignores
+### NPM ignores ###
 *~
 *.sw[mnpcod]
 *.log
@@ -13,6 +10,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
+www
 .idea/
 .ionic/
 .sourcemaps/
@@ -20,8 +18,6 @@ npm-debug.log*
 .tmp/
 .versions/
 coverage/
-www/
-resources/
 node_modules/
 tmp/
 temp/
@@ -46,12 +42,6 @@ migrations/
 media/*
 !media/.gitkeep
 
-# If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
-# in your Git repository. Update and uncomment the following line accordingly.
-# <django-project-name>/staticfiles/
-
-### Django.Python Stack ###
-# Byte-compiled / optimized / DLL files
 *.py[cod]
 *$py.class
 
@@ -79,8 +69,6 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -103,8 +91,6 @@ coverage.xml
 
 # Translations
 *.mo
-
-# Django stuff:
 
 # Flask stuff:
 instance/
@@ -161,9 +147,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-
-## Angular ignores
 
 # compiled output
 /dist
