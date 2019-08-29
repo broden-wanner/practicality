@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Note } from './note';
-import { API_URL } from '../app.module';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +18,7 @@ export class NotesService {
      */
     loadNotes(): void {
         this.http
-            .get<Note[]>(`${API_URL}/api/notes/`)
+            .get<Note[]>(`/api/notes/`)
             .subscribe(notes => this.notes.next(notes), error => this.notes.error(error));
     }
 

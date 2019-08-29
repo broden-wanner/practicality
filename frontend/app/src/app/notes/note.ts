@@ -8,8 +8,6 @@ export class Note {
         this.creator = data.creator;
         this.title = data.title;
         this.body = data.body;
-        this.dateCreated = data.date_created
-            ? data.date_created
-            : data.dateCreated;
+        this.dateCreated = data.date_created ? data.date_created : data.dateCreated;
     }
 }

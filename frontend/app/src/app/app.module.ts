@@ -18,5 +18,3 @@ import { HttpClientModule } from '@angular/common/http';
     bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-export const API_URL = 'http://localhost:8000';
