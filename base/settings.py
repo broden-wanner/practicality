@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'accounts',
     'frontend',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'knox'
 ]
 
 MIDDLEWARE = [
@@ -82,13 +83,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'base.wsgi.application'
 
-
+# Django Rest Framework
 # TODO: Change this for production
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
 }
+
+
+# Setting for django rest knox which sets the ttl of the tokens
+
+TOKEN_TTL = datetime.timedelta(hours=10)
+
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -100,15 +109,20 @@ DATABASES = {
     }
 }
 
+
 # A list of origins that are authorized to make cross-site HTTP requests
 # Used with Django CORS
+
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = []
 if ENV_ROLE == 'development':
     CORS_ORIGIN_ALLOW_ALL = True
 
+
 # Specify the auth user model to be used
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

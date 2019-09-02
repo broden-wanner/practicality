@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NotesPage } from './notes.page';
+import { NoteListComponent } from './note-list/note-list.component';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: NotesPage
+        component: NoteListComponent
     },
     {
         path: ':id',
@@ -21,6 +21,6 @@ const routes: Routes = [
 
 @NgModule({
     imports: [CommonModule, FormsModule, IonicModule, RouterModule.forChild(routes)],
-    declarations: [NotesPage, NoteDetailComponent]
+    declarations: [NoteListComponent, NoteDetailComponent]
 })
-export class NotesPageModule {}
+export class NotesModule {}
