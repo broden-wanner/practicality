@@ -8,7 +8,8 @@ class Note(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Note {self.title} on {self.date_created}'
+        formatted_date = self.date_created.strftime('%d/%m/%y')
+        return f'{self.title} on {formatted_date}'
 
 class Project(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
