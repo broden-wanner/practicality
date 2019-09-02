@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from './notes.service';
 import { Note } from './note';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-notes',
@@ -8,11 +10,17 @@ import { Note } from './note';
     styleUrls: ['./notes.page.scss']
 })
 export class NotesPage implements OnInit {
-    notes: Note[];
+    notes: Observable<Note[]>;
 
-    constructor(private notesService: NotesService) {}
+    constructor(private router: Router, private notesService: NotesService) {}
 
-    ngOnInit() {
-        this.notesService.getNotes().subscribe(notes => (this.notes = notes));
+    public ngOnInit(): void {
+        this.notesService.loadAllNotes();
+        this.notes = this.notesService.getAllNotes();
+    }
+
+    public goToNote(note: Note): void {
+        this.notesService.currentNote = note;
+        this.router.navigate([`notes/${note.id}`]);
     }
 }

@@ -1,3 +1,3 @@
-<p>
-  note-detail works!
-</p>
+<ng-container *ngIf="noteObs | async as note; else loading">
+    <h1>{{ note.title }}</h1>
+</ng-container>

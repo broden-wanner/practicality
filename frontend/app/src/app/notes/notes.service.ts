@@ -2,30 +2,43 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Note } from './note';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class NotesService {
-    private notes = new BehaviorSubject<Note[]>(null);
+    private notes = new BehaviorSubject<Note[]>(new Array<Note>());
+    public currentNote: Note;
 
-    constructor(private http: HttpClient) {
-        this.loadNotes();
-    }
+    constructor(private http: HttpClient) {}
 
     /**
      * Get the notes from the server and load them into the subject
      */
-    loadNotes(): void {
-        this.http
-            .get<Note[]>(`/api/notes/`)
-            .subscribe(notes => this.notes.next(notes), error => this.notes.error(error));
+    public loadAllNotes(): void {
+        this.http.get<Note[]>('/api/notes/').subscribe(
+            notes => {
+                this.notes.next(notes);
+            },
+            error => {
+                this.notes.error(error);
+            }
+        );
     }
 
     /**
-     * Retuns an observable of the notes
+     * Retuns an observable of all the available notes
      */
-    getNotes(): Observable<Note[]> {
+    public getAllNotes(): Observable<Note[]> {
         return this.notes.asObservable();
+    }
+
+    /**
+     * Get a specific note from the server and return an observable
+     * @param note - the id of the note to retrieve from the server
+     */
+    public getNote(noteId: number): Observable<Note> {
+        return this.http.get<Note>(`/api/notes/${noteId}/`).pipe(tap(note => (this.currentNote = note)));
     }
 }
