@@ -13,7 +13,7 @@ Functioning web app with angular frontend and django backend
 
 ## Practical and UI Ideas
 
--   Navbar on top with account and shit
+-   Navbar on top with account and stuff
 -   In a /dashboard url
 -   Side menu with previous notes and/or projects, etc.
 -   Tabs to display the main notes
