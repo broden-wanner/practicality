@@ -1,3 +1,5 @@
+declare var moment: any;
+
 export class Note {
     id: number;
     creator: number;
@@ -10,6 +12,10 @@ export class Note {
         this.creator = data.creator;
         this.title = data.title;
         this.body = data.body;
-        this.dateCreated = data.date_created ? data.date_created : data.dateCreated;
+        this.dateCreated = moment(data.date_created).format('dddd, MMMM Do, YYYY');
+    }
+
+    public static fromJson(data: any): Note {
+        return new Note(data);
     }
 }

@@ -37,6 +37,9 @@
                             },
                             {
                                 "input": "src/global.scss"
+                            },
+                            {
+                                "input": "src/styles/ckeditor.scss"
                             }
                         ],
                         "scripts": ["node_modules/moment/min/moment.min.js"]

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
-import { User } from '../models/user';
+import { User } from '../../shared/models/user';
 
 declare var moment: any;
 
@@ -48,6 +48,7 @@ export class AuthService {
 
     /**
      * Sets the login session token in local storage
+     * @param data - data to store in local storage
      */
     private setSession(data: any): void {
         localStorage.setItem('user_token', data.token);

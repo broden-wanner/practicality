@@ -3,20 +3,14 @@
         <ion-menu type="overlay">
             <ion-header>
                 <ion-toolbar>
-                    <ion-title>Menu</ion-title>
+                    <ion-title>Practicality</ion-title>
                 </ion-toolbar>
             </ion-header>
 
             <ion-content>
                 <ion-list>
-                    <ion-menu-toggle
-                        auto-hide="false"
-                        *ngFor="let p of appPages"
-                    >
-                        <ion-item
-                            [routerDirection]="'root'"
-                            [routerLink]="[p.url]"
-                        >
+                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+                        <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
                             <ion-icon slot="start" [name]="p.icon"></ion-icon>
                             <ion-label>
                                 {{ p.title }}
@@ -24,6 +18,14 @@
                         </ion-item>
                     </ion-menu-toggle>
                 </ion-list>
+
+                <div class="center-button-container" *ngIf="!isLoggedIn()">
+                    <ion-button routerLink="/login">Login</ion-button>
+                </div>
+
+                <div class="center-button-container" *ngIf="isLoggedIn()">
+                    <ion-button (click)="logout()" color="danger">Logout</ion-button>
+                </div>
             </ion-content>
         </ion-menu>
 

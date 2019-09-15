@@ -11,7 +11,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let note of notes | async" (click)="goToNote(note)">
+        <ion-item *ngFor="let note of notes | async" (click)="goToNote(note)" button="true">
             {{ note.title }}
         </ion-item>
     </ion-list>

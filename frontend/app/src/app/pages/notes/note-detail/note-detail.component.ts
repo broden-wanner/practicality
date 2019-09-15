@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { NotesService } from '../notes.service';
-import { Note } from '../note';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Note } from '../../../shared/models/note';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'app-note-detail',
@@ -11,20 +11,24 @@ import { switchMap } from 'rxjs/operators';
     styleUrls: ['./note-detail.component.scss']
 })
 export class NoteDetailComponent implements OnInit {
-    noteObs: Observable<Note>;
+    public note: Note;
+    public editor = ClassicEditor;
+    public editorConfig = {
+        placeholder: 'Your notes, here.'
+    };
 
     constructor(private route: ActivatedRoute, private notesService: NotesService) {}
 
     public ngOnInit(): void {
         if (this.notesService.currentNote) {
-            this.noteObs = of(this.notesService.currentNote);
+            this.note = this.notesService.currentNote;
         } else {
-            this.noteObs = this.route.paramMap.pipe(
-                switchMap(params => {
-                    const noteId = +params.get('id');
-                    return this.notesService.getNote(noteId);
-                })
-            );
+            this.route.paramMap.subscribe(params => {
+                const noteId = +params.get('id');
+                this.notesService.getNote(noteId).subscribe(note => {
+                    this.note = note;
+                });
+            });
         }
     }
 }

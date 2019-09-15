@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Note } from './note';
-import { tap } from 'rxjs/operators';
+import { Note } from '../../shared/models/note';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class NotesService {
     public loadAllNotes(): void {
         this.http.get<Note[]>('/api/notes/').subscribe(
             notes => {
-                this.notes.next(notes);
+                this.notes.next(notes.map(Note.fromJson));
             },
             error => {
                 this.notes.error(error);
@@ -39,6 +39,9 @@ export class NotesService {
      * @param note - the id of the note to retrieve from the server
      */
     public getNote(noteId: number): Observable<Note> {
-        return this.http.get<Note>(`/api/notes/${noteId}/`).pipe(tap(note => (this.currentNote = note)));
+        return this.http.get<Note>(`/api/notes/${noteId}/`).pipe(
+            map(Note.fromJson),
+            tap(note => (this.currentNote = note))
+        );
     }
 }

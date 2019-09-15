@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../notes.service';
-import { Note } from '../note';
+import { Note } from '../../../shared/models/note';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -19,6 +19,10 @@ export class NoteListComponent implements OnInit {
         this.notes = this.notesService.getAllNotes();
     }
 
+    /**
+     * Sets the current note in the note service and returns the url to navigate to
+     * @param note - note to navigate to
+     */
     public goToNote(note: Note): void {
         this.notesService.currentNote = note;
         this.router.navigate([`notes/${note.id}`]);
