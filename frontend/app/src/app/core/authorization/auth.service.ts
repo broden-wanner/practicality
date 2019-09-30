@@ -85,11 +85,11 @@ export class AuthService {
     }
 
     /**
-     * Public getter to return the current logged in User
+     * Public getter to return the value of the currently logged in user
      *
      * @returns The user object itself (will be null if no one is logged in)
      */
-    public getCurrentUser(): User {
+    public getCurrentUserValue(): User {
         return this.currentUser.value;
     }
 

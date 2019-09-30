@@ -11,7 +11,7 @@
 
 <ion-content ion-padding>
     <div class="login">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="login-form">
             <ion-item>
                 <ion-label position="floating">Username</ion-label>
                 <ion-input formControlName="username" type="text"></ion-input>

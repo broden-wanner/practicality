@@ -53,10 +53,10 @@ export class AppComponent {
     }
 
     /**
-     * Gets the user for display
+     * Gets the user for display by subscribing to auth service user observable
      */
     public getUser(): void {
-        this.user = this.authService.getCurrentUser();
+        this.authService.getCurrentUserObs().subscribe(user => this.user = user);
     }
 
     /**

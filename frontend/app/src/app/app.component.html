@@ -20,11 +20,11 @@
                 </ion-list>
 
                 <div class="center-button-container" *ngIf="!isLoggedIn()">
-                    <ion-button routerLink="/login">Login</ion-button>
+                    <ion-button routerLink="/account/login">Login</ion-button>
                 </div>
 
-                <div class="center-button-container" *ngIf="isLoggedIn()">
-                    <ion-text> Hi, {{ user.username }}! </ion-text>
+                <div class="center-button-container" *ngIf="isLoggedIn() && user">
+                    <ion-text> Hi, <a routerLink="/account/view">{{ user.username }}!</a> </ion-text>
                     <ion-button (click)="logout()" color="danger">Logout</ion-button>
                 </div>
             </ion-content>
