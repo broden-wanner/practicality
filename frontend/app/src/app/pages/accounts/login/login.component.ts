@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
     public async presentToast() {
         const toast = await this.toastController.create({
             message: 'Incorrect credentials',
-            duration: 2000
+            showCloseButton: true,
+            color: 'danger',
+            duration: 4000
         });
         toast.present();
     }

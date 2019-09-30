@@ -12,10 +12,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class NoteDetailComponent implements OnInit {
     public note: Note;
-    public editor = ClassicEditor;
-    public editorConfig = {
-        placeholder: 'Your notes, here.'
-    };
 
     constructor(private route: ActivatedRoute, private notesService: NotesService) {}
 

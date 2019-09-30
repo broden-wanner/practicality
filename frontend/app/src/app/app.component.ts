@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './core/authorization/auth.service';
+import { User } from './shared/models/user';
 
 @Component({
     selector: 'app-root',
@@ -13,16 +14,23 @@ import { AuthService } from './core/authorization/auth.service';
 export class AppComponent {
     public appPages = [
         {
-            title: 'Home',
-            url: '/home',
-            icon: 'home'
+            title: 'Dashboard',
+            url: '/dashboard',
+            icon: 'book'
         },
         {
             title: 'Notes',
             url: '/notes',
             icon: 'musical-notes'
+        },
+        {
+            title: 'Projects',
+            url: '/projects',
+            icon: 'cafe'
         }
     ];
+
+    public user: User;
 
     constructor(
         private platform: Platform,
@@ -31,6 +39,7 @@ export class AppComponent {
         private authService: AuthService
     ) {
         this.initializeApp();
+        this.getUser();
     }
 
     /**
@@ -41,6 +50,13 @@ export class AppComponent {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
+    }
+
+    /**
+     * Gets the user for display
+     */
+    public getUser(): void {
+        this.user = this.authService.getCurrentUser();
     }
 
     /**

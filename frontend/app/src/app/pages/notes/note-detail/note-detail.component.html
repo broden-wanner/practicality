@@ -6,12 +6,16 @@
             </ion-buttons>
             <ion-title>
                 {{ note.title }}
-                <ion-note>{{ note.dateCreated }}</ion-note>
+                <ion-note>
+                    {{ note.dateCreated.format('dddd, MMMM Do, YYYY') }}
+                </ion-note>
             </ion-title>
         </ion-toolbar>
     </ion-header>
 
-    <ion-content>
-        <ckeditor [editor]="editor" [config]="editorConfig"></ckeditor>
+    <ion-content padding>
+        <div class="editor-container">
+            <quill-editor></quill-editor>
+        </div>
     </ion-content>
 </ng-container>

@@ -7,18 +7,22 @@ const routes: Routes = [
         loadChildren: () => import('./pages/accounts/accounts.module').then(m => m.AccountsModule)
     },
     {
-        path: 'home',
-        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+        path: 'dashboard',
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
         path: 'notes',
         loadChildren: () => import('./pages/notes/notes.module').then(m => m.NotesModule)
     },
     {
+        path: 'projects',
+        loadChildren: () => import('./pages/projects/projects.module').then(m => m.ProjectsModule)
+    },
+    {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
-    }
+    },
 ];
 
 @NgModule({

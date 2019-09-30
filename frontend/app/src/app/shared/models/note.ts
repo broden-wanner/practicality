@@ -12,7 +12,7 @@ export class Note {
         this.creator = data.creator;
         this.title = data.title;
         this.body = data.body;
-        this.dateCreated = moment(data.date_created).format('dddd, MMMM Do, YYYY');
+        this.dateCreated = moment(data.date_created);
     }
 
     public static fromJson(data: any): Note {

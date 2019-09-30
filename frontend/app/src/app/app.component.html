@@ -1,6 +1,6 @@
 <ion-app>
     <ion-split-pane>
-        <ion-menu type="overlay">
+        <ion-menu type="overlay" class="side-menu">
             <ion-header>
                 <ion-toolbar>
                     <ion-title>Practicality</ion-title>
@@ -24,6 +24,7 @@
                 </div>
 
                 <div class="center-button-container" *ngIf="isLoggedIn()">
+                    <ion-text> Hi, {{ user.username }}! </ion-text>
                     <ion-button (click)="logout()" color="danger">Logout</ion-button>
                 </div>
             </ion-content>
