@@ -20,7 +20,9 @@ export class NoteDetailComponent implements OnInit {
             this.note = this.notesService.currentNote;
         } else {
             this.route.paramMap.subscribe(params => {
+                // Get the id from the url parameters
                 const noteId = +params.get('id');
+                // Make a GET request to the server to get the note
                 this.notesService.getNote(noteId).subscribe(note => {
                     this.note = note;
                 });

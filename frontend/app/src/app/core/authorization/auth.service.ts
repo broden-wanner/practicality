@@ -13,7 +13,9 @@ export class AuthService {
     private currentUser: BehaviorSubject<User>;
 
     constructor(private http: HttpClient) {
-        this.currentUser = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('current_user')));
+        // Load the user from local storage upon loading
+        const userJSON = JSON.parse(localStorage.getItem('current_user'));
+        this.currentUser = new BehaviorSubject<User>(User.fromJson(userJSON));
     }
 
     /**
@@ -23,7 +25,7 @@ export class AuthService {
      * @returns An Observable for the login request
      */
     public login(credentials: { username: string; password: string }): Observable<any> {
-        return this.http.post<any>('http://localhost:8000/api/auth/login', credentials).pipe(
+        return this.http.post<any>('/api/auth/login', credentials).pipe(
             shareReplay(),
             tap(data => {
                 this.setSession(data);
@@ -38,7 +40,7 @@ export class AuthService {
      * @returns An Observable of the logout request
      */
     public logout(): Observable<any> {
-        return this.http.post<any>('http://localhost:8000/api/auth/logout', {}).pipe(
+        return this.http.post<any>('/api/auth/logout', {}).pipe(
             tap(() => {
                 this.removeSession();
                 this.currentUser.next(null);

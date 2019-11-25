@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./note-list.component.scss']
 })
 export class NoteListComponent implements OnInit {
-    notes: Observable<Note[]>;
+    public notes: Observable<Note[]>;
 
     constructor(private router: Router, private notesService: NotesService) {}
 
