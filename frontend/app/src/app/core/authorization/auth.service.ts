@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { shareReplay, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { User } from '../../shared/models/user';
 
 declare var moment: any;
@@ -44,6 +44,11 @@ export class AuthService {
             tap(() => {
                 this.removeSession();
                 this.currentUser.next(null);
+            }),
+            catchError(error => {
+                this.removeSession();
+                this.currentUser.next(null);
+                return throwError(error);
             })
         );
     }

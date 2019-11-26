@@ -31,9 +31,10 @@ export class LoginComponent implements OnInit {
      */
     public onSubmit(): void {
         const credentials = this.loginForm.value;
-        this.authService
-            .login(credentials)
-            .subscribe(success => this.router.navigate(['']), error => this.presentToast());
+        this.authService.login(credentials).subscribe(
+            () => this.router.navigate(['']),
+            () => this.presentToast()
+        );
     }
 
     /**

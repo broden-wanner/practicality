@@ -17,16 +17,29 @@
                             </ion-label>
                         </ion-item>
                     </ion-menu-toggle>
+                    <ion-menu-toggle auto-hide="false">
+                        <ion-item
+                            [routerDirection]="'root'"
+                            routerLink="/account/login"
+                            *ngIf="!isLoggedIn()"
+                        >
+                            <ion-icon slot="start" name="log-in"></ion-icon>
+                            <ion-label>
+                                Login
+                            </ion-label>
+                        </ion-item>
+                        <ion-item
+                            [routerDirection]="'root'"
+                            routerLink="/account/view"
+                            *ngIf="isLoggedIn() && user"
+                        >
+                            <ion-icon slot="start" name="contact"></ion-icon>
+                            <ion-label>
+                                Account &amp; Settings
+                            </ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
                 </ion-list>
-
-                <div class="center-button-container" *ngIf="!isLoggedIn()">
-                    <ion-button routerLink="/account/login">Login</ion-button>
-                </div>
-
-                <div class="center-button-container" *ngIf="isLoggedIn() && user">
-                    <ion-text> Hi, <a routerLink="/account/view">{{ user.username }}!</a> </ion-text>
-                    <ion-button (click)="logout()" color="danger">Logout</ion-button>
-                </div>
             </ion-content>
         </ion-menu>
 

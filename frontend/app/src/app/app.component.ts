@@ -56,7 +56,7 @@ export class AppComponent {
      * Gets the user for display by subscribing to auth service user observable
      */
     public getUser(): void {
-        this.authService.getCurrentUserObs().subscribe(user => this.user = user);
+        this.authService.getCurrentUserObs().subscribe(user => (this.user = user));
     }
 
     /**
@@ -65,12 +65,5 @@ export class AppComponent {
      */
     public isLoggedIn(): boolean {
         return this.authService.isLoggedIn();
-    }
-
-    /**
-     * Uses the auth service to log out users
-     */
-    public logout(): void {
-        this.authService.logout().subscribe();
     }
 }
