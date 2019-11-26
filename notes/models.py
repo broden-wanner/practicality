@@ -20,3 +20,10 @@ class Project(models.Model):
 
     def __str__(self):
         return f'Project {self.title}'
+
+class Subtask(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return f'Subtask {self.title} on project {project.title}'
