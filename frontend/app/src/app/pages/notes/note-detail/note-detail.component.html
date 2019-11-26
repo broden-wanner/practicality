@@ -1,25 +1,25 @@
 <ng-container *ngIf="note; else loading">
-    <ion-header>
-        <ion-toolbar>
-            <ion-buttons slot="start">
-                <ion-menu-button></ion-menu-button>
-            </ion-buttons>
-            <ion-title>
-                {{ note.title }}
-                <ion-note>
-                    {{ note.dateCreated.format('dddd, MMMM Do, YYYY') }}
-                </ion-note>
-            </ion-title>
-        </ion-toolbar>
-    </ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        {{ note.title }}
+        <ion-note>
+          {{ note.dateCreated.format('dddd, MMMM Do, YYYY') }}
+        </ion-note>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-content padding>
-        <div class="editor-container">
-            <quill-editor></quill-editor>
-        </div>
-    </ion-content>
+  <ion-content padding>
+    <div class="editor-container">
+      <quill-editor></quill-editor>
+    </div>
+  </ion-content>
 </ng-container>
 
 <ng-template #loading>
-    <ion-spinner name="crescent"></ion-spinner>
+  <ion-spinner name="crescent"></ion-spinner>
 </ng-template>
