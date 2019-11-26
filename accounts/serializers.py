@@ -8,7 +8,15 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'first_name', 'last_name', 'level', 'notes_created')
+        fields = (
+            'id', 
+            'email', 
+            'username', 
+            'first_name', 
+            'last_name', 
+            'level', 
+            'notes_created'
+        )
 
     def get_notes_created(self, obj):
         return Note.objects.filter(user=obj).count()
@@ -16,7 +24,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'password', 'first_name', 'last_name')
+        fields = ('id', 'email', 'username', 'password', 'first_name', 'last_name')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):

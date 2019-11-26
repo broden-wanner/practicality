@@ -13,6 +13,10 @@
   <div class="register-container">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="register-form">
       <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">First Name</ion-label>
         <ion-input formControlName="first_name" type="text"></ion-input>
       </ion-item>
