@@ -10,17 +10,16 @@ class NoteViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing notes.
     """
-    queryset = Note.objects.all()
     serializer_class = NoteSerializer
-    permission_classes = [permissions.AllowAny]
-
+    # Users must be authenticated to view their notes
+    permission_classes = [permissions.IsAuthenticated]
 
     def list(self, request):
         """
         Override the list method to create a new note
         if there has not been one created for this day
         """
-        queryset = Note.objects.all()
+        queryset = Note.objects.filter(user=self.request.user)
         serializer = NoteSerializer(queryset, many=True)
 
         latest_note = queryset.latest('date_created')
