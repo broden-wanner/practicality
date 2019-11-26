@@ -11,27 +11,28 @@ import { NoteListComponent } from './note-list/note-list.component';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: NoteListComponent
-    },
-    {
-        path: ':id',
-        component: NoteDetailComponent
-    }
+  {
+    path: '',
+    component: NoteListComponent
+  },
+  {
+    path: ':id',
+    component: NoteDetailComponent
+  }
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        QuillModule.forRoot({
-            modules: {
-                syntax: false
-            }
-        }),
-        RouterModule.forChild(routes)],
-    declarations: [NoteListComponent, NoteDetailComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    QuillModule.forRoot({
+      modules: {
+        syntax: false
+      }
+    }),
+    RouterModule.forChild(routes)
+  ],
+  declarations: [NoteListComponent, NoteDetailComponent]
 })
 export class NotesModule {}

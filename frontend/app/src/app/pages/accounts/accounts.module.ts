@@ -4,23 +4,29 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+
 import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'view',
-        component: AccountComponent
-    }
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'view',
+    component: AccountComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
 ];
 
 @NgModule({
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, IonicModule, RouterModule.forChild(routes)],
-    declarations: [LoginComponent, AccountComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, IonicModule, RouterModule.forChild(routes)],
+  declarations: [LoginComponent, AccountComponent, RegisterComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AccountsModule {}

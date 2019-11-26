@@ -1,16 +1,16 @@
-.login {
+.register-container {
   display: flex;
   justify-content: center;
   height: 100%;
   align-items: center;
 
-  .login-form {
+  .register-form {
     max-width: 400px;
     width: 100%;
   }
 }
 
-.login-button-container {
+.register-button-container {
   display: flex;
   justify-content: center;
   margin-top: var(--default-margin);

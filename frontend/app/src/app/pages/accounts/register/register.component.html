@@ -4,14 +4,22 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Login
+      Register
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content ion-padding>
-  <div class="login">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="login-form">
+  <div class="register-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="register-form">
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input formControlName="first_name" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input formControlName="last_name" type="text"></ion-input>
+      </ion-item>
       <ion-item>
         <ion-label position="floating">Username</ion-label>
         <ion-input formControlName="username" type="text"></ion-input>
@@ -21,8 +29,8 @@
         <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
 
-      <div class="login-button-container">
-        <ion-button type="submit">Login</ion-button>
+      <div class="register-button-container">
+        <ion-button type="submit">Register</ion-button>
       </div>
     </form>
   </div>

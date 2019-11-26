@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/core/authorization/auth.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements OnInit {
-  public loginForm: FormGroup;
+export class RegisterComponent implements OnInit {
+  public registerForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -20,18 +20,20 @@ export class LoginComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
+      first_name: '',
+      last_name: '',
       username: '',
       password: ''
     });
   }
 
   /**
-   * Attempts to log the user in with the given form data
+   * Attempts to register the user in with the given form data
    */
   public onSubmit(): void {
-    const credentials = this.loginForm.value;
-    this.authService.login(credentials).subscribe(
+    const credentials = this.registerForm.value;
+    this.authService.register(credentials).subscribe(
       () => this.router.navigate(['']),
       () => this.presentToast()
     );
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
    */
   public async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Incorrect credentials',
+      message: 'Something is wrong, I can feel it',
       showCloseButton: true,
       color: 'danger',
       duration: 4000
