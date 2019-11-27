@@ -3,7 +3,7 @@ from django.conf import settings
 
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    body = models.TextField()
+    body = models.TextField(blank=True)
     title = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
 

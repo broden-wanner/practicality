@@ -44,4 +44,12 @@ export class NotesService {
       tap(note => (this.currentNote = note))
     );
   }
+
+  /**
+   * PUT an updated note to the server
+   * @param note - The new note to update
+   */
+  public updateNote(note: Note): Observable<any> {
+    return this.http.put<Note>(`/api/notes/${note.id}/`, note);
+  }
 }

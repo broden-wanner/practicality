@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotesService } from '../notes.service';
 import { Note } from '../../../shared/models/note';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-note-detail',
@@ -19,6 +20,9 @@ export class NoteDetailComponent implements OnInit {
   public ngOnInit(): void {
     if (this.notesService.currentNote) {
       this.note = this.notesService.currentNote;
+      // Initialize the form and subscribe to note changes
+      this.noteForm = this.fb.group({ body: this.note.body });
+      this.onNoteChanges();
     } else {
       this.route.paramMap.subscribe(params => {
         // Get the id from the url parameters
@@ -26,19 +30,27 @@ export class NoteDetailComponent implements OnInit {
         // Make a GET request to the server to get the note
         this.notesService.getNote(noteId).subscribe(note => {
           this.note = note;
+          // Initialize the form to the note once retrieved
+          this.noteForm = this.fb.group({ body: this.note.body });
+          this.onNoteChanges();
         });
       });
     }
-
-    // Subscribe to note changes
-    this.initNoteForm();
   }
 
   /**
-   * Send the note changes to the server periodically
+   * Subscribe to changes from the note form and send the note changes
+   * to the server periodically
    */
-  public initNoteForm(): void {
-    this.noteForm = this.fb.group({body: ''});
-    this.noteForm.valueChanges.subscribe(val => console.log(val));
+  public onNoteChanges(): void {
+    this.noteForm.valueChanges
+      .pipe(
+        // Debouce the user input time
+        debounceTime(500)
+      )
+      .subscribe(val => {
+        this.note.body = val.body ? val.body : '';
+        this.notesService.updateNote(this.note).subscribe();
+      });
   }
 }
