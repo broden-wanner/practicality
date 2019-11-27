@@ -14,6 +14,13 @@ class NoteViewSet(viewsets.ModelViewSet):
     # Users must be authenticated to view their notes
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        """
+        Override the get_queryset method to return only those
+        notes which belong to the user
+        """
+        return Note.objects.filter(user=self.request.user)
+
     def list(self, request):
         """
         Override the list method to create a new note

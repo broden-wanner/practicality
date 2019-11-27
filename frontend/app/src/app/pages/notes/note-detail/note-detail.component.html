@@ -13,9 +13,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content padding>
+  <ion-content padding [formGroup]="noteForm">
     <div class="editor-container">
-      <quill-editor></quill-editor>
+      <quill-editor formControlName="body"></quill-editor>
     </div>
   </ion-content>
 </ng-container>

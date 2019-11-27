@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { NotesService } from '../notes.service';
 import { Note } from '../../../shared/models/note';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-note-detail',
@@ -12,8 +12,9 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class NoteDetailComponent implements OnInit {
   public note: Note;
+  public noteForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private notesService: NotesService) {}
+  constructor(private route: ActivatedRoute, private notesService: NotesService, private fb: FormBuilder) {}
 
   public ngOnInit(): void {
     if (this.notesService.currentNote) {
@@ -28,5 +29,16 @@ export class NoteDetailComponent implements OnInit {
         });
       });
     }
+
+    // Subscribe to note changes
+    this.initNoteForm();
+  }
+
+  /**
+   * Send the note changes to the server periodically
+   */
+  public initNoteForm(): void {
+    this.noteForm = this.fb.group({body: ''});
+    this.noteForm.valueChanges.subscribe(val => console.log(val));
   }
 }
