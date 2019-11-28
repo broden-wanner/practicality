@@ -14,10 +14,6 @@ const routes: Routes = [
   {
     path: '',
     component: NoteListComponent
-  },
-  {
-    path: ':id',
-    component: NoteDetailComponent
   }
 ];
 

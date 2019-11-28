@@ -1,48 +1,50 @@
 <ion-app>
-    <ion-split-pane>
-        <ion-menu type="overlay" class="side-menu">
-            <ion-header>
-                <ion-toolbar>
-                    <ion-title>Practicality</ion-title>
-                </ion-toolbar>
-            </ion-header>
+  <ion-split-pane>
+    <ion-menu type="overlay" class="side-menu">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Practicality</ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-            <ion-content>
-                <ion-list>
-                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-                        <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-                            <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                            <ion-label>
-                                {{ p.title }}
-                            </ion-label>
-                        </ion-item>
-                    </ion-menu-toggle>
-                    <ion-menu-toggle auto-hide="false">
-                        <ion-item
-                            [routerDirection]="'root'"
-                            routerLink="/account/login"
-                            *ngIf="!isLoggedIn()"
-                        >
-                            <ion-icon slot="start" name="log-in"></ion-icon>
-                            <ion-label>
-                                Login
-                            </ion-label>
-                        </ion-item>
-                        <ion-item
-                            [routerDirection]="'root'"
-                            routerLink="/account/view"
-                            *ngIf="isLoggedIn() && user"
-                        >
-                            <ion-icon slot="start" name="contact"></ion-icon>
-                            <ion-label>
-                                Account &amp; Settings
-                            </ion-label>
-                        </ion-item>
-                    </ion-menu-toggle>
-                </ion-list>
-            </ion-content>
-        </ion-menu>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item routerLinkActive="active-page" [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{ p.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item
+              routerLinkActive="active-page"
+              [routerDirection]="'root'"
+              routerLink="/account/login"
+              *ngIf="!isLoggedIn()"
+            >
+              <ion-icon slot="start" name="log-in"></ion-icon>
+              <ion-label>
+                Login
+              </ion-label>
+            </ion-item>
+            <ion-item
+              routerLinkActive="active-page"
+              [routerDirection]="'root'"
+              routerLink="/account/view"
+              *ngIf="isLoggedIn() && user"
+            >
+              <ion-icon slot="start" name="contact"></ion-icon>
+              <ion-label>
+                Account &amp; Settings
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
 
-        <ion-router-outlet main></ion-router-outlet>
-    </ion-split-pane>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

@@ -36,16 +36,19 @@ export class RegisterComponent implements OnInit {
     const credentials = this.registerForm.value;
     this.authService.register(credentials).subscribe(
       () => this.router.navigate(['']),
-      () => this.presentToast()
+      err => {
+        console.log(err.error);
+        this.presentToast('There are some errors in registrations. See above.');
+      }
     );
   }
 
   /**
    * Presents the toast to the user
    */
-  public async presentToast() {
+  public async presentToast(msg: string) {
     const toast = await this.toastController.create({
-      message: 'Something is wrong, I can feel it',
+      message: msg,
       showCloseButton: true,
       color: 'danger',
       duration: 4000

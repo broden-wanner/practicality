@@ -1,12 +1,16 @@
 .center-button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: var(--default-margin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--default-margin);
 }
 
 .split-pane-visible .side-menu {
-	max-width: 275px;
-	min-width: 100px;
+  max-width: 275px;
+  min-width: 100px;
+}
+
+.active-page {
+  --background: var(--ion-color-light);
 }

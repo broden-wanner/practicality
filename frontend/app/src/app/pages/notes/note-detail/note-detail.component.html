@@ -1,19 +1,5 @@
 <ng-container *ngIf="note; else loading">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        {{ note.title }}
-        <ion-note>
-          {{ note.dateCreated.format('dddd, MMMM Do, YYYY') }}
-        </ion-note>
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content padding [formGroup]="noteForm">
+  <ion-content [formGroup]="noteForm">
     <div class="editor-container">
       <quill-editor formControlName="body"></quill-editor>
     </div>

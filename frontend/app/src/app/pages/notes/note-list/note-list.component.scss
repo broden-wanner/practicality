@@ -1,0 +1,19 @@
+.list-and-editor-container {
+  display: flex;
+  height: 100%;
+
+  .list-container {
+    max-width: 275px;
+    width: 100%;
+    min-width: 100px;
+    border: var(--border);
+
+    .active-note {
+      --background: var(--ion-color-light);
+    }
+  }
+
+  .note-container {
+    width: 100%;
+  }
+}

@@ -9,7 +9,6 @@ import { tap, map } from 'rxjs/operators';
 })
 export class NotesService {
   private notes = new BehaviorSubject<Note[]>(new Array<Note>());
-  public currentNote: Note;
 
   constructor(private http: HttpClient) {}
 

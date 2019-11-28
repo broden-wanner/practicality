@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { NotesService } from '../notes.service';
 import { Note } from '../../../shared/models/note';
@@ -11,30 +10,24 @@ import { debounceTime } from 'rxjs/operators';
   templateUrl: './note-detail.component.html',
   styleUrls: ['./note-detail.component.scss']
 })
-export class NoteDetailComponent implements OnInit {
-  public note: Note;
+export class NoteDetailComponent implements OnInit, OnChanges {
+  @Input() public note: Note;
   public noteForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private notesService: NotesService, private fb: FormBuilder) {}
+  constructor(private notesService: NotesService, private fb: FormBuilder) {
+    // Initialize the form with an empty body
+    this.noteForm = this.fb.group({ body: '' });
+  }
 
   public ngOnInit(): void {
-    if (this.notesService.currentNote) {
-      this.note = this.notesService.currentNote;
-      // Initialize the form and subscribe to note changes
-      this.noteForm = this.fb.group({ body: this.note.body });
-      this.onNoteChanges();
-    } else {
-      this.route.paramMap.subscribe(params => {
-        // Get the id from the url parameters
-        const noteId = +params.get('id');
-        // Make a GET request to the server to get the note
-        this.notesService.getNote(noteId).subscribe(note => {
-          this.note = note;
-          // Initialize the form to the note once retrieved
-          this.noteForm = this.fb.group({ body: this.note.body });
-          this.onNoteChanges();
-        });
-      });
+    // Initialize the form and subscribe to note changes
+    this.onNoteChanges();
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.note.currentValue) {
+      // If the input note is changes, reset the form
+      this.noteForm.setValue({ body: changes.note.currentValue.body });
     }
   }
 
