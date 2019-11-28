@@ -29,11 +29,12 @@
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';
 [contenteditable] {
-    -webkit-user-select: text;
-    user-select: text;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 /* Custom CSS variables */
 :root {
-    --default-margin: 20px;
+  --default-margin: 20px;
+  --default-padding: 20px;
 }

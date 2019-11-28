@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 import { NotesService } from '../notes.service';
 import { Note } from '../../../shared/models/note';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, tap, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-note-detail',
@@ -11,8 +11,9 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./note-detail.component.scss']
 })
 export class NoteDetailComponent implements OnInit, OnChanges {
-  @Input() public note: Note;
-  public noteForm: FormGroup;
+  @Input() note: Note;
+  @Output() saved = new EventEmitter<boolean>();
+  noteForm: FormGroup;
 
   constructor(private notesService: NotesService, private fb: FormBuilder) {
     // Initialize the form with an empty body
@@ -38,12 +39,19 @@ export class NoteDetailComponent implements OnInit, OnChanges {
   public onNoteChanges(): void {
     this.noteForm.valueChanges
       .pipe(
+        // Must be called to prevent error
+        delay(0),
+        // Set the saved state
+        tap(() => this.saved.emit(false)),
         // Debouce the user input time
-        debounceTime(500)
+        debounceTime(1000)
       )
-      .subscribe(val => {
+      .subscribe((val: any) => {
         this.note.body = val.body ? val.body : '';
-        this.notesService.updateNote(this.note).subscribe();
+        this.notesService.updateNote(this.note).subscribe(() => {
+          // Emit a saved value once done
+          this.saved.emit(true);
+        });
       });
   }
 }

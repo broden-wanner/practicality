@@ -13,6 +13,7 @@ import { tap } from 'rxjs/operators';
 export class NoteListComponent implements OnInit {
   public notes: Observable<Note[]>;
   public activeNote: Note;
+  public saved = true;
 
   constructor(private notesService: NotesService) {}
 
@@ -32,6 +33,15 @@ export class NoteListComponent implements OnInit {
    */
   public selectNote(note: Note): void {
     this.activeNote = note;
+  }
+
+  /**
+   * Updates the saved state of the note
+   * @param state the emitted saved state of the note
+   */
+  public updateSavedState(state: boolean): void {
+    console.log(state);
+    this.saved = state;
   }
 
   /**

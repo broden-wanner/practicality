@@ -38,10 +38,7 @@ export class NotesService {
    * @param note - the id of the note to retrieve from the server
    */
   public getNote(noteId: number): Observable<Note> {
-    return this.http.get<Note>(`/api/notes/${noteId}/`).pipe(
-      map(Note.fromJson),
-      tap(note => (this.currentNote = note))
-    );
+    return this.http.get<Note>(`/api/notes/${noteId}/`).pipe(map(Note.fromJson));
   }
 
   /**
