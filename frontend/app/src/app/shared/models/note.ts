@@ -3,14 +3,12 @@ declare var moment: any;
 export class Note {
   id: number;
   user: number;
-  title: string;
   body: string;
   dateCreated: string;
 
   constructor(data: any) {
     this.id = data.id;
     this.user = data.user;
-    this.title = data.title;
     this.body = data.body;
     this.dateCreated = moment(data.date_created);
   }

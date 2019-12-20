@@ -5,7 +5,6 @@ from django.utils.text import slugify
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     body = models.TextField(blank=True)
-    title = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

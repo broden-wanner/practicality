@@ -32,10 +32,10 @@ class NoteViewSet(viewsets.ModelViewSet):
         try:
             latest_note = queryset.latest('date_created')
             if latest_note.date_created.date() < datetime.date.today() and isinstance(request.user, CustomUser):
-                new_note = Note.objects.create(user=request.user, body='', title='For today')
+                new_note = Note.objects.create(user=request.user, body='')
                 queryset.append(new_note)
         except Note.DoesNotExist:
-            first_note = Note.objects.create(user=request.user, body='', title='For today')
+            first_note = Note.objects.create(user=request.user, body='')
             queryset = [first_note]
             
         serializer = NoteSerializer(queryset, many=True)
