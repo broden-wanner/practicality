@@ -41,7 +41,6 @@ export class NoteListComponent implements OnInit {
    * @param state the emitted saved state of the note
    */
   public updateSavedState(state: boolean): void {
-    console.log(state);
     this.saved = state;
   }
 

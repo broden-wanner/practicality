@@ -27,3 +27,9 @@ class Subtask(models.Model):
     
     def __str__(self):
         return f'Subtask {self.title} on project {project.title}'
+
+class Habit(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'Habit {self.name}'
