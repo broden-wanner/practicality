@@ -2,11 +2,11 @@ export class Subtask {
   id: number;
   project: number;
   completed: boolean;
-  title: string;
+  name: string;
 
   constructor(data: any) {
     this.id = data.id;
-    this.title = data.title;
+    this.name = data.name;
     this.completed = data.completed;
     this.project = data.project;
   }
