@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 
 class Note(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -21,12 +22,16 @@ class Project(models.Model):
     def __str__(self):
         return f'Project {self.title}'
 
+    def save(self, *args, **kwargs):
+        self.title_slug = slugify(self.title)
+        super(Project, self).save(*args, **kwargs)
+
 class Subtask(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     
     def __str__(self):
-        return f'Subtask {self.title} on project {project.title}'
+        return f'Subtask {self.name} on project {project.name}'
 
 class Habit(models.Model):
     name = models.CharField(max_length=200)

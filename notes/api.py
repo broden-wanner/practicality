@@ -2,8 +2,8 @@ import datetime
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.response import Response
-from notes.models import Note
-from notes.serializers import NoteSerializer
+from notes.models import Note, Project
+from notes.serializers import NoteSerializer, ProjectSerializer
 from accounts.models import CustomUser
 
 class NoteViewSet(viewsets.ModelViewSet):
@@ -33,3 +33,18 @@ class NoteViewSet(viewsets.ModelViewSet):
         if latest_note.date_created.date() < datetime.date.today() and isinstance(request.user, CustomUser):
             Note.objects.create(user=request.user, body='', title='For today')
         return Response(serializer.data)
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing projects
+    """
+    serializer_class = ProjectSerializer
+    # Users must be authenticated to view their projects
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        """
+        Override the get_queryset method to return only those
+        projects which belong to the user
+        """
+        return Project.objects.filter(user=self.request.user)
