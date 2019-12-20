@@ -14,6 +14,7 @@ export class NoteListComponent implements OnInit {
   public notes: Observable<Note[]>;
   public activeNote: Note;
   public saved = true;
+  public loaded = false;
 
   constructor(private notesService: NotesService) {}
 
@@ -42,6 +43,14 @@ export class NoteListComponent implements OnInit {
   public updateSavedState(state: boolean): void {
     console.log(state);
     this.saved = state;
+  }
+
+  /**
+   * Updates the loaded state of the note
+   * @param state - the emmitted loaded state of the note
+   */
+  public updateLoadedState(state: boolean): void {
+    this.loaded = state;
   }
 
   /**

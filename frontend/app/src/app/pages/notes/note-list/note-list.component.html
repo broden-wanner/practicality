@@ -32,7 +32,11 @@
 
     <!-- Note detail component -->
     <div class="note-container">
-      <app-note-detail [note]="activeNote" (saved)="updateSavedState($event)"></app-note-detail>
+      <app-note-detail
+        [note]="activeNote"
+        (saveEvent)="updateSavedState($event)"
+        (loadEvent)="updateLoadedState($event)"
+      ></app-note-detail>
     </div>
   </div>
 </ion-content>
