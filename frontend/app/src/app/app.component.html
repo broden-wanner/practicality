@@ -1,6 +1,6 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu type="overlay" class="side-menu">
+  <ion-split-pane contentId="menu-content">
+    <ion-menu type="overlay" class="side-menu" contentId="menu-content">
       <ion-header>
         <ion-toolbar>
           <ion-title>Practicality</ion-title>
@@ -45,6 +45,6 @@
       </ion-content>
     </ion-menu>
 
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

@@ -6,8 +6,14 @@
 
 <ion-content ion-padding>
   <ion-list class="list-container">
-    <ion-item *ngFor="let project of projects | async" button detail>
-      <ion-label>{{ project.title }}</ion-label>
-    </ion-item>
+    <ng-container *ngFor="let project of projects | async">
+      <ion-item button detail>
+        <ion-label>{{ project.title }}</ion-label>
+      </ion-item>
+      <ion-item *ngFor="let subtask of project.subtasks" (click)="checkSubtask(subtask)" button>
+        <ion-icon [name]="subtask.completed ? 'checkmark-circle-outline' : 'radio-button-off'" slot="start"></ion-icon>
+        <ion-label>{{ subtask.name }}</ion-label>
+      </ion-item>
+    </ng-container>
   </ion-list>
 </ion-content>

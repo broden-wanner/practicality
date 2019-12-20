@@ -1,9 +1,10 @@
 import datetime
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.response import Response
-from notes.models import Note, Project
-from notes.serializers import NoteSerializer, ProjectSerializer
+from notes.models import Note, Project, Subtask
+from notes.serializers import NoteSerializer, ProjectSerializer, SubtaskSerializer
 from accounts.models import CustomUser
 
 class NoteViewSet(viewsets.ModelViewSet):
@@ -48,3 +49,18 @@ class ProjectViewSet(viewsets.ModelViewSet):
         projects which belong to the user
         """
         return Project.objects.filter(user=self.request.user)
+
+class SubtaskViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing subtasks on projects
+    """
+    serializer_class = SubtaskSerializer
+    # Users must be authenticated to view subtasks
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        """
+        Override the get_queryset method to return only those
+        projects which belong to the user
+        """
+        return Subtask.objects.filter(project__user=self.request.user)
