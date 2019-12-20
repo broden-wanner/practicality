@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from notes.models import Note, Project, Subtask
+from backend.models import Note, Project, Subtask
 
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,6 +26,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             Subtask.objects.create(project=project, **subtask)
         return project
 
+    # TODO: Add update method
     # def update(self, instance, validated_data):
     #     subtask_data = validated_data.pop('subtasks')
     #     for subtask in instance.subtasks:

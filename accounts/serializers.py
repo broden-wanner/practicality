@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from accounts.models import CustomUser
-from notes.models import Note
+from backend.models import Note
 
 class CustomUserSerializer(serializers.ModelSerializer):
     notes_created = serializers.SerializerMethodField(method_name='get_notes_created')

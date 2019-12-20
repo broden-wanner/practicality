@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework import routers
-from notes.api import NoteViewSet, ProjectViewSet, SubtaskViewSet
+from backend.api import NoteViewSet, ProjectViewSet, SubtaskViewSet
 
 router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')

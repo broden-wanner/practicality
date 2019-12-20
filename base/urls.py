@@ -5,7 +5,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('frontend.urls')),
-    path('api/', include('notes.urls')),
+    path('api/', include('backend.urls')),
     path('api/auth/', include('accounts.urls')),
     path('admin/', admin.site.urls),
 ] + static('/', document_root=settings.STATIC_ROOT)

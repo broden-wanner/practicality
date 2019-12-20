@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.response import Response
-from notes.models import Note, Project, Subtask
-from notes.serializers import NoteSerializer, ProjectSerializer, SubtaskSerializer
+from backend.models import Note, Project, Subtask
+from backend.serializers import NoteSerializer, ProjectSerializer, SubtaskSerializer
 from accounts.models import CustomUser
 
 class NoteViewSet(viewsets.ModelViewSet):
@@ -28,11 +28,18 @@ class NoteViewSet(viewsets.ModelViewSet):
         if there has not been one created for this day
         """
         queryset = Note.objects.filter(user=self.request.user)
-        serializer = NoteSerializer(queryset, many=True)
 
-        latest_note = queryset.latest('date_created')
-        if latest_note.date_created.date() < datetime.date.today() and isinstance(request.user, CustomUser):
-            Note.objects.create(user=request.user, body='', title='For today')
+        try:
+            latest_note = queryset.latest('date_created')
+            if latest_note.date_created.date() < datetime.date.today() and isinstance(request.user, CustomUser):
+                new_note = Note.objects.create(user=request.user, body='', title='For today')
+                queryset.append(new_note)
+        except Note.DoesNotExist:
+            first_note = Note.objects.create(user=request.user, body='', title='For today')
+            queryset = [first_note]
+            
+        serializer = NoteSerializer(queryset, many=True)
+        
         return Response(serializer.data)
 
 class ProjectViewSet(viewsets.ModelViewSet):
