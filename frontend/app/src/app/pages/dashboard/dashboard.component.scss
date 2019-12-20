@@ -1,15 +1,15 @@
 .top-card {
-	--background: white;
+  --background: white;
 }
 
 .dashboard {
-	background-image: url("/assets/home-background.jpg");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	height: 100%;
+  background-image: url('/assets/home-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
 
-	&__content {
-		padding: 20px;
-	}
+  &__content {
+    padding: 20px;
+  }
 }

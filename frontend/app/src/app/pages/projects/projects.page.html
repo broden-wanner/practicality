@@ -4,6 +4,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content ion-padding>
+  <ion-list class="list-container">
+    <ion-item *ngFor="let project of projects | async" button detail>
+      <ion-label>{{ project.title }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -20,18 +20,19 @@ class Project(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Project {self.title}'
+        return f'{self.title}'
 
     def save(self, *args, **kwargs):
         self.title_slug = slugify(self.title)
         super(Project, self).save(*args, **kwargs)
 
 class Subtask(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='subtasks', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
+    completed = models.BooleanField(default=False)
     
     def __str__(self):
-        return f'Subtask {self.name} on project {project.name}'
+        return f'{self.name} on project {self.project.title}'
 
 class Habit(models.Model):
     name = models.CharField(max_length=200)
