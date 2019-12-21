@@ -28,12 +28,12 @@ class NoteViewSet(viewsets.ModelViewSet):
         if there has not been one created for this day
         """
         queryset = Note.objects.filter(user=self.request.user)
-
         try:
             latest_note = queryset.latest('date_created')
             if latest_note.date_created.date() < datetime.date.today() and isinstance(request.user, CustomUser):
                 new_note = Note.objects.create(user=request.user, body='')
-                queryset.append(new_note)
+                # Redo the query to include the new note
+                queryset = Note.objects.filter(user=self.request.user)
         except Note.DoesNotExist:
             first_note = Note.objects.create(user=request.user, body='')
             queryset = [first_note]

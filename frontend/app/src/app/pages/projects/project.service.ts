@@ -47,6 +47,6 @@ export class ProjectService {
    * @param subtask - the subtask to update
    */
   public updateSubtask(subtask: Subtask): Observable<Subtask> {
-    return this.http.put<Subtask>(`api/subtasks/${subtask.id}/`, subtask).pipe(map(Subtask.fromJson));
+    return this.http.put<Subtask>(`api/subtasks/${subtask.id}/`, subtask.toJson()).pipe(map(Subtask.fromJson));
   }
 }
