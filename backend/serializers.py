@@ -17,11 +17,12 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['user', 'title', 'description', 'date_created', 'subtasks']
+        fields = ['user', 'title', 'description', 'dateCreated', 'dateToComplete', 'dateCompleted', 'subtasks']
+        read_only_fields = ['user', 'dateCreated', 'dateCompleted']
 
     def create(self, validated_data):
         subtask_data = validated_data.pop('subtasks')
-        project = Project.objects.create(**validated_data)
+        project = Project.objects.create(**validated_data, user=self.context['request'].user)
         for subtask in subtask_data:
             Subtask.objects.create(project=project, **subtask)
         return project

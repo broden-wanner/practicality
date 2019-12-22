@@ -1,3 +1,5 @@
+declare var moment: any;
+
 import { Subtask } from './subtask';
 
 export class Project {
@@ -11,15 +13,28 @@ export class Project {
   subtasks: Array<Subtask>;
   collapsed: boolean;
 
-  constructor(data: any) {
-    this.id = data.id;
-    this.user = data.user;
-    this.title = data.title;
-    this.description = data.description;
-    this.dateCreated = data.date_created;
-    this.dateToComplete = data.date_to_complete;
-    this.dateCompleted = data.date_completed;
-    this.subtasks = data.subtasks;
+  constructor(
+    id: number,
+    user: number,
+    title: string,
+    description: string,
+    dateCreated: string,
+    dateToComplete: string,
+    dateCompleted: string,
+    subtasks: Subtask[]
+  ) {
+    this.id = id;
+    this.user = user;
+    this.title = title;
+    this.description = description;
+    this.dateCreated = moment.utc(dateCreated).toISOString();
+    this.dateToComplete = moment.utc(dateToComplete).toISOString();
+    this.dateCompleted = moment.utc(dateCompleted).toISOString();
+    if (Array.isArray(subtasks)) {
+      this.subtasks = subtasks.map(Subtask.fromJson);
+    } else {
+      this.subtasks = new Array<Subtask>();
+    }
     this.collapsed = false; // Property for display purposes only
   }
 
@@ -28,9 +43,16 @@ export class Project {
    * @param data - data from server to map to a Project object
    */
   public static fromJson(data: any): Project {
-    const project = new Project(data);
-    // Map the subtasks to a Subtask class
-    project.subtasks = project.subtasks.map(Subtask.fromJson);
+    const project = new Project(
+      data.id,
+      data.user,
+      data.title,
+      data.description,
+      data.dateCreated,
+      data.dateToComplete,
+      data.dateCompleted,
+      data.subtasks
+    );
     return project;
   }
 
@@ -46,6 +68,9 @@ export class Project {
    * Gives a value between 0 and 1
    */
   public get progress(): number {
+    if (this.subtasks.length === 0) {
+      return 0;
+    }
     const completed = this.subtasks.filter(s => s.completed).length;
     return completed / this.subtasks.length;
   }

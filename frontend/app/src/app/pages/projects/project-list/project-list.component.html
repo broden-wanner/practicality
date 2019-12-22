@@ -1,0 +1,22 @@
+<ion-content ion-padding>
+  <ion-list class="list-container">
+    <ng-container *ngFor="let project of projects | async">
+      <ion-item button (click)="project.toggleSubtasks()">
+        <p class="project-title">{{ project.title }}</p>
+        <ion-progress-bar [value]="project.progress"></ion-progress-bar>
+        <p class="progress-text">{{ project.progress * 100 }}%</p>
+        <ion-icon slot="end" name="add" button></ion-icon>
+        <ion-icon slot="end" name="more"></ion-icon>
+      </ion-item>
+      <ng-container *ngIf="!project.collapsed">
+        <ion-item *ngFor="let subtask of project.subtasks" (click)="checkSubtask(subtask)" button>
+          <ion-icon
+            [name]="subtask.completed ? 'checkmark-circle-outline' : 'radio-button-off'"
+            slot="start"
+          ></ion-icon>
+          <ion-label>{{ subtask.name }}</ion-label>
+        </ion-item>
+      </ng-container>
+    </ng-container>
+  </ion-list>
+</ion-content>

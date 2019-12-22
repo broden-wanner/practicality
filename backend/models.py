@@ -16,9 +16,9 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     title_slug = models.SlugField(unique=True)
     description = models.TextField()
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_to_complete = models.DateField()
-    date_completed = models.DateField(blank=True)
+    dateCreated = models.DateTimeField(auto_now_add=True)
+    dateToComplete = models.DateTimeField()
+    dateCompleted = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.title}'
@@ -30,7 +30,7 @@ class Project(models.Model):
 class Subtask(models.Model):
     project = models.ForeignKey(Project, related_name='subtasks', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    date_to_complete = models.DateField()
+    dateToComplete = models.DateTimeField()
     completed = models.BooleanField(default=False)
     
     def __str__(self):

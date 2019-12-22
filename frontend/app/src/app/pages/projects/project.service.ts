@@ -43,10 +43,18 @@ export class ProjectService {
   }
 
   /**
+   * Makes a POST request to the api to make a new project
+   * @param project - the new project object
+   */
+  public createProject(project: Project): Observable<Project> {
+    return this.http.post<Project>(`/api/projects/`, project).pipe(map(Project.fromJson));
+  }
+
+  /**
    * PUT a new subtask to update on the server
    * @param subtask - the subtask to update
    */
   public updateSubtask(subtask: Subtask): Observable<Subtask> {
-    return this.http.put<Subtask>(`api/subtasks/${subtask.id}/`, subtask.toJson()).pipe(map(Subtask.fromJson));
+    return this.http.put<Subtask>(`api/subtasks/${subtask.id}/`, subtask).pipe(map(Subtask.fromJson));
   }
 }
