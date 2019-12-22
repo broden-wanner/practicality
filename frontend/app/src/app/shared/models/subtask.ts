@@ -1,16 +1,17 @@
+declare var moment: any;
+
 export class Subtask {
   id: number;
   name: string;
   completed: boolean;
   dateToComplete: string;
-
   project: number;
 
   constructor(id: number, name: string, completed: boolean, dateToComplete: string, project: number) {
     this.id = id;
     this.name = name;
     this.completed = completed;
-    this.dateToComplete = dateToComplete;
+    this.dateToComplete = moment.utc(dateToComplete).toISOString();
     this.project = project;
   }
 
@@ -19,6 +20,7 @@ export class Subtask {
    * @param data - json object from the server to map to a subtask
    */
   public static fromJson(data: any): Subtask {
+    console.log(data);
     return new Subtask(data.id, data.name, data.completed, data.dateToComplete, data.project);
   }
 }

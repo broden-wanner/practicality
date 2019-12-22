@@ -9,22 +9,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content ion-padding>
-  <div class="login">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="login-form">
-      <ion-item>
-        <ion-label position="floating">Username</ion-label>
-        <ion-input formControlName="username" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input formControlName="password" type="password"></ion-input>
-      </ion-item>
+<ion-content ion-padding class="container">
+  <div class="center-col">
+    <ion-card class="login-card">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="login-form">
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
 
-      <div class="login-button-container">
-        <ion-button type="submit">Login</ion-button>
-      </div>
-    </form>
+        <div class="login-button-container">
+          <ion-button type="submit">Login</ion-button>
+        </div>
+      </form>
+    </ion-card>
+    <ion-card class="register-card">
+      <p>New to Practicality? <a routerLink="/account/register">Create an account.</a></p>
+    </ion-card>
   </div>
+
   <ion-toast-controller></ion-toast-controller>
 </ion-content>
