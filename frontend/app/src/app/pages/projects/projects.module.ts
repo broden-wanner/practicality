@@ -8,11 +8,13 @@ import { IonicModule } from '@ionic/angular';
 import { ProjectsPage } from './projects.page';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: ProjectsPage,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

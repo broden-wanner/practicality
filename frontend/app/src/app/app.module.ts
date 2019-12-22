@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './core/authorization/auth.service';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { DatePipe } from './shared/pipes/date.pipe';
+import { AuthGuard } from './core/guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent, DatePipe],
@@ -20,6 +21,7 @@ import { DatePipe } from './shared/pipes/date.pipe';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     AuthService,
+    AuthGuard,
     StatusBar,
     SplashScreen,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
