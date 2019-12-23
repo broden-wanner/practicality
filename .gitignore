@@ -1,6 +1,10 @@
 ### Digital ocean ignores ###
 digitalocean/
 
+### Custom ignores ###
+frontend/app/build/*
+!frontend/app/build/index.html
+
 ### NPM ignores ###
 *~
 *.sw[mnpcod]
@@ -53,7 +57,6 @@ media/*
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 !frontend/dist/
@@ -143,7 +146,6 @@ dmypy.json
 .pyre/
 
 # compiled output
-build/
 /dist
 /tmp
 /out-tsc
