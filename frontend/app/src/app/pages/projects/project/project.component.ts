@@ -9,10 +9,10 @@ import { Project } from 'src/app/shared/models/project';
 })
 export class ProjectComponent implements OnInit {
   @Input() project: Project;
-  newSubtaskEvent: Subject<Project>;
+  newSubtaskEvent: Subject<void>;
 
   constructor() {
-    this.newSubtaskEvent = new Subject<Project>();
+    this.newSubtaskEvent = new Subject<void>();
   }
 
   ngOnInit() {}
@@ -20,7 +20,7 @@ export class ProjectComponent implements OnInit {
   /**
    * Emit a signal to the subtask list to create a new subtask component
    */
-  public newSubtask(project: Project): void {
-    this.newSubtaskEvent.next(project);
+  public newSubtask(): void {
+    this.newSubtaskEvent.next();
   }
 }

@@ -8,6 +8,8 @@ export class Subtask {
   completed: boolean;
   dateToComplete: string;
   project: number;
+  /** For functional purposes */
+  editing: boolean;
 
   constructor(id: number, name: string, completed: boolean, dateToComplete: string, project: number) {
     this.id = id;
@@ -15,6 +17,7 @@ export class Subtask {
     this.completed = completed;
     this.dateToComplete = moment.utc(dateToComplete).toISOString();
     this.project = project;
+    this.editing = false;
   }
 
   /**
@@ -30,6 +33,13 @@ export class Subtask {
    * @param project - project to put the subtask on
    */
   public static emptySubtaskOn(project: Project): Subtask {
-    return new Subtask(null, null, false, null, project.id);
+    return new Subtask(0, '', false, '', project.id);
+  }
+
+  public equals(subtask: Subtask): boolean {
+    if (!subtask) {
+      return false;
+    }
+    return this.id === subtask.id;
   }
 }

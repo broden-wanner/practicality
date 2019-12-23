@@ -1,4 +1,14 @@
-<ion-item (click)="checkSubtask(subtask)" button>
-  <ion-icon [name]="subtask.completed ? 'checkmark-circle-outline' : 'radio-button-off'" slot="start"></ion-icon>
-  <ion-label>{{ subtask.name }}</ion-label>
-</ion-item>
+<ng-container *ngIf="!subtask.editing">
+  <ion-item (click)="checkSubtask(subtask)" button>
+    <ion-icon [name]="subtask.completed ? 'checkmark-circle-outline' : 'radio-button-off'" slot="start"></ion-icon>
+    <ion-label>{{ subtask.name }}</ion-label>
+    <ion-label class="subtask-date">{{ subtask.dateToComplete | date: 'MMM d, y' }}</ion-label>
+  </ion-item>
+</ng-container>
+<form *ngIf="subtask.editing" [formGroup]="subtaskForm" (ngSubmit)="saveSubtask()" (keyup.enter)="saveSubtask()">
+  <ion-item>
+    <ion-icon [name]="subtask.completed ? 'checkmark-circle-outline' : 'radio-button-off'" slot="start"></ion-icon>
+    <ion-input formControlName="name" type="text" placeholder="Name" (ionBlur)="saveSubtask()"></ion-input>
+    <ion-datetime formControlName="dateToComplete" placeholder="Date"></ion-datetime>
+  </ion-item>
+</form>
