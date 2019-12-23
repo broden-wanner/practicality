@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { User } from '../../shared/models/user';
+import { environment } from 'src/environments/environment';
 
 declare var moment: any;
 
@@ -25,7 +26,7 @@ export class AuthService {
    * @returns An Observable for the login request
    */
   public login(credentials: { username: string; password: string }): Observable<any> {
-    return this.http.post<any>('/api/auth/login', credentials).pipe(
+    return this.http.post<any>(`${environment.api}/auth/login`, credentials).pipe(
       shareReplay(),
       tap(data => {
         this.setSession(data);
@@ -40,7 +41,7 @@ export class AuthService {
    * @returns An Observable of the logout request
    */
   public logout(): Observable<any> {
-    return this.http.post<any>('/api/auth/logout', {}).pipe(
+    return this.http.post<any>(`${environment.api}/auth/logout`, {}).pipe(
       tap(() => {
         this.removeSession();
         this.currentUser.next(null);
@@ -61,7 +62,7 @@ export class AuthService {
    * @returns An Observable of the registration request
    */
   public register(newCredentials: any): Observable<any> {
-    return this.http.post<any>('/api/auth/register', newCredentials).pipe(
+    return this.http.post<any>(`${environment.api}/auth/register`, newCredentials).pipe(
       tap(userData => this.setSession(userData)),
       catchError(err => throwError(err))
     );

@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title slot="start">Projects</ion-title>
-    <ion-button class="toolbar-button" slot="end" routerLink="/projects/new">
-      <ion-icon class="inline-icon" name="add"></ion-icon>
-      New Project
-    </ion-button>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/projects/new">
+        <ion-icon class="inline-icon" name="add"></ion-icon>
+        New Project
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
