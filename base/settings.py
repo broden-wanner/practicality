@@ -33,8 +33,7 @@ DEBUG = False
 if ENV_ROLE == 'development':
     DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = [get_env_variable('HOST')]
 
 # Application definition
 
