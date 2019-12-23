@@ -102,13 +102,24 @@ TOKEN_TTL = datetime.timedelta(hours=10)
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if ENV_ROLE == 'development':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
-
+elif ENV_ROLE == 'production':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': get_env_variable('DB_NAME'),
+            'USER': get_env_variable('DB_USER'),
+            'PASSWORD': get_env_variable('DB_PASSWORD'),
+            'HOST': get_env_variable('HOST'),
+            'PORT': '',
+        }
+    }
 
 # A list of origins that are authorized to make cross-site HTTP requests
 # Used with Django CORS
