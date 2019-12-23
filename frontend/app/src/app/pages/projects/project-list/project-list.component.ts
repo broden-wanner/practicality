@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { ProjectService } from '../project.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Project } from 'src/app/shared/models/project';
-import { Subtask } from 'src/app/shared/models/subtask';
 
 @Component({
   selector: 'app-project-list',
@@ -17,14 +16,5 @@ export class ProjectListComponent implements OnInit {
   ngOnInit(): void {
     this.projectService.loadAllProjects();
     this.projects = this.projectService.getAllProjects();
-  }
-
-  /**
-   * Toggles the subtask completion state and puts the new subtask to the server
-   * @param subtask - the subtask to check
-   */
-  public checkSubtask(subtask: Subtask): void {
-    subtask.completed = !subtask.completed;
-    this.projectService.updateSubtask(subtask).subscribe();
   }
 }

@@ -17,8 +17,8 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['user', 'title', 'description', 'dateCreated', 'dateToComplete', 'dateCompleted', 'subtasks']
-        read_only_fields = ['user', 'dateCreated', 'dateCompleted']
+        fields = ['id', 'user', 'title', 'description', 'dateCreated', 'dateToComplete', 'dateCompleted', 'subtasks']
+        read_only_fields = ['id', 'user', 'dateCreated', 'dateCompleted']
 
     def create(self, validated_data):
         subtask_data = validated_data.pop('subtasks')

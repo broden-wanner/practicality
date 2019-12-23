@@ -39,6 +39,18 @@ export class Project {
   }
 
   /**
+   * Returns the progress of the project based on the number of subtasks completed.
+   * Gives a value between 0 and 1
+   */
+  public get progress(): number {
+    if (this.subtasks.length === 0) {
+      return 0;
+    }
+    const completed = this.subtasks.filter(s => s.completed).length;
+    return completed / this.subtasks.length;
+  }
+
+  /**
    * Maps data from the server to a Project object
    * @param data - data from server to map to a Project object
    */
@@ -56,22 +68,14 @@ export class Project {
     return project;
   }
 
+  equals(project: Project): boolean {
+    return project.id === this.id;
+  }
+
   /**
    * Toggles the display of the subtasks on the project
    */
   public toggleSubtasks(): void {
     this.collapsed = !this.collapsed;
-  }
-
-  /**
-   * Returns the progress of the project based on the number of subtasks completed.
-   * Gives a value between 0 and 1
-   */
-  public get progress(): number {
-    if (this.subtasks.length === 0) {
-      return 0;
-    }
-    const completed = this.subtasks.filter(s => s.completed).length;
-    return completed / this.subtasks.length;
   }
 }

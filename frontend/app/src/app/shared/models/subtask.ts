@@ -1,3 +1,5 @@
+import { Project } from './project';
+
 declare var moment: any;
 
 export class Subtask {
@@ -21,5 +23,13 @@ export class Subtask {
    */
   public static fromJson(data: any): Subtask {
     return new Subtask(data.id, data.name, data.completed, data.dateToComplete, data.project);
+  }
+
+  /**
+   * Returns an empty subtask on a project
+   * @param project - project to put the subtask on
+   */
+  public static emptySubtaskOn(project: Project): Subtask {
+    return new Subtask(null, null, false, null, project.id);
   }
 }

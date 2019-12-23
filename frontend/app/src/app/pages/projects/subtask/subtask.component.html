@@ -1,0 +1,4 @@
+<ion-item (click)="checkSubtask(subtask)" button>
+  <ion-icon [name]="subtask.completed ? 'checkmark-circle-outline' : 'radio-button-off'" slot="start"></ion-icon>
+  <ion-label>{{ subtask.name }}</ion-label>
+</ion-item>

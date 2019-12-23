@@ -9,6 +9,9 @@ import { ProjectsPage } from './projects.page';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { SubtaskListComponent } from './subtask-list/subtask-list.component';
+import { SubtaskComponent } from './subtask/subtask.component';
+import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
   {
@@ -30,6 +33,14 @@ const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, RouterModule.forChild(routes)],
-  declarations: [ProjectsPage, ProjectListComponent, ProjectDetailComponent]
+  declarations: [
+    ProjectsPage,
+    ProjectComponent,
+    ProjectListComponent,
+    ProjectDetailComponent,
+    SubtaskListComponent,
+    SubtaskComponent
+  ],
+  entryComponents: [SubtaskComponent]
 })
 export class ProjectsModule {}
