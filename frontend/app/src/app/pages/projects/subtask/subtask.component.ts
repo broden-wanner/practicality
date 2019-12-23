@@ -27,6 +27,13 @@ export class SubtaskComponent implements OnInit {
     this.projectService.updateSubtask(subtask).subscribe();
   }
 
+  /**
+   * Enters the subtask into editing mode
+   */
+  public enterEdit(): void {
+    this.subtask.editing = true;
+  }
+
   // TODO: Finish this
   /**
    * Save the subtask to the server
