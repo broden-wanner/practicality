@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Note } from '../../shared/models/note';
-import { tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class NotesService {
    * Get the notes from the server and load them into the subject
    */
   public loadAllNotes(): void {
-    this.http.get<Note[]>('/api/notes/').subscribe(
+    this.http.get<Note[]>(`${environment.api}/notes/`).subscribe(
       notes => {
         this.notes.next(notes.map(Note.fromJson));
       },
@@ -38,7 +39,7 @@ export class NotesService {
    * @param note - the id of the note to retrieve from the server
    */
   public getNote(noteId: number): Observable<Note> {
-    return this.http.get<Note>(`/api/notes/${noteId}/`).pipe(map(Note.fromJson));
+    return this.http.get<Note>(`${environment.api}/notes/${noteId}/`).pipe(map(Note.fromJson));
   }
 
   /**
@@ -46,6 +47,6 @@ export class NotesService {
    * @param note - The new note to update
    */
   public updateNote(note: Note): Observable<any> {
-    return this.http.put<Note>(`/api/notes/${note.id}/`, note);
+    return this.http.put<Note>(`${environment.api}/notes/${note.id}/`, note);
   }
 }

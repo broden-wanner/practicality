@@ -20,7 +20,6 @@ export class Subtask {
    * @param data - json object from the server to map to a subtask
    */
   public static fromJson(data: any): Subtask {
-    console.log(data);
     return new Subtask(data.id, data.name, data.completed, data.dateToComplete, data.project);
   }
 }

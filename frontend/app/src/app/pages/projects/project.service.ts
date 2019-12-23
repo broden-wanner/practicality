@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Project } from 'src/app/shared/models/project';
 import { map } from 'rxjs/operators';
 import { Subtask } from 'src/app/shared/models/subtask';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ProjectService {
    * Get the Projects from the server and load them into the subject
    */
   public loadAllProjects(): void {
-    this.http.get<Project[]>('/api/projects/').subscribe(
+    this.http.get<Project[]>(`${environment.api}/projects/`).subscribe(
       Projects => {
         this.projects.next(Projects.map(Project.fromJson));
       },
@@ -39,7 +40,7 @@ export class ProjectService {
    * @param projectId - the id of the Project to retrieve from the server
    */
   public getProject(projectId: number): Observable<Project> {
-    return this.http.get<Project>(`/api/projects/${projectId}/`).pipe(map(Project.fromJson));
+    return this.http.get<Project>(`${environment.api}/projects/${projectId}/`).pipe(map(Project.fromJson));
   }
 
   /**
@@ -47,7 +48,7 @@ export class ProjectService {
    * @param project - the new project object
    */
   public createProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(`/api/projects/`, project).pipe(map(Project.fromJson));
+    return this.http.post<Project>(`${environment.api}/projects/`, project).pipe(map(Project.fromJson));
   }
 
   /**
@@ -55,6 +56,6 @@ export class ProjectService {
    * @param subtask - the subtask to update
    */
   public updateSubtask(subtask: Subtask): Observable<Subtask> {
-    return this.http.put<Subtask>(`api/subtasks/${subtask.id}/`, subtask).pipe(map(Subtask.fromJson));
+    return this.http.put<Subtask>(`${environment.api}/subtasks/${subtask.id}/`, subtask).pipe(map(Subtask.fromJson));
   }
 }

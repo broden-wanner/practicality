@@ -1,3 +1,6 @@
+### Digital ocean ignores ###
+digitalocean/
+
 ### NPM ignores ###
 *~
 *.sw[mnpcod]
