@@ -10,7 +10,7 @@ class SubtaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subtask
         fields = '__all__'
-        read_only_fields = ('project',) # Must be read only because the project will create it
+        # read_only_fields = ('project',) # Must be read only because the project will create it
 
 class ProjectSerializer(serializers.ModelSerializer):
     subtasks = SubtaskSerializer(many=True, read_only=False)
@@ -27,10 +27,17 @@ class ProjectSerializer(serializers.ModelSerializer):
             Subtask.objects.create(project=project, **subtask)
         return project
 
-    # TODO: Add update method
+    # # TODO: Add update method maybe
     # def update(self, instance, validated_data):
     #     subtask_data = validated_data.pop('subtasks')
     #     for subtask in instance.subtasks:
-    #         s = subtask_data.get(id=subtask.id)
-    #         s.update(s, )
-    #     return project
+    #         pass
+
+    #     # Simply set each attribute on the instance, and then save it.
+    #     for attr, value in validated_data.items():
+    #         setattr(instance, attr, value)
+
+    #     # Save the instance
+    #     instance.save()
+
+    #     return instance

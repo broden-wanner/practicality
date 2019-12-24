@@ -1,7 +1,7 @@
 <ion-item button (click)="project.toggleSubtasks()">
   <p class="project-title">{{ project.title }}</p>
   <ion-progress-bar [value]="project.progress"></ion-progress-bar>
-  <p class="progress-text">{{ project.progress * 100 }}%</p>
+  <p class="progress-text">{{ project.progress | percent }}</p>
   <ion-icon slot="end" name="add" (click)="$event.stopPropagation(); newSubtask()"></ion-icon>
   <ion-icon slot="end" name="more"></ion-icon>
 </ion-item>

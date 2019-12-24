@@ -11,7 +11,6 @@ import { Subtask } from 'src/app/shared/models/subtask';
 export class SubtaskListComponent implements OnInit {
   @Input() project: Project;
   @Input() newSubtaskEvent: Observable<void>;
-  newSubtask: Subtask;
 
   constructor() {}
 
@@ -23,8 +22,8 @@ export class SubtaskListComponent implements OnInit {
    * Create a new empty subtask on the project and append it to the host container
    */
   public makeSubtask(): void {
-    this.newSubtask = Subtask.emptySubtaskOn(this.project);
-    this.newSubtask.editing = true;
-    this.project.subtasks.push(this.newSubtask);
+    const newSubtask = Subtask.emptySubtaskOn(this.project);
+    newSubtask.editing = true;
+    this.project.subtasks.push(newSubtask);
   }
 }

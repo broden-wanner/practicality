@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Project } from 'src/app/shared/models/project';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Subtask } from 'src/app/shared/models/subtask';
 import { environment } from 'src/environments/environment';
 
@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProjectService {
   private projects = new BehaviorSubject<Project[]>(new Array<Project>());
+  private projectsArray: Project[];
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +20,9 @@ export class ProjectService {
    */
   public loadAllProjects(): void {
     this.http.get<Project[]>(`${environment.api}/projects/`).subscribe(
-      Projects => {
-        this.projects.next(Projects.map(Project.fromJson));
+      projects => {
+        this.projectsArray = projects.map(Project.fromJson);
+        this.projects.next(this.projectsArray);
       },
       error => {
         this.projects.error(error);
@@ -52,10 +54,40 @@ export class ProjectService {
   }
 
   /**
-   * PUT a new subtask to update on the server
+   * POSTs a new subtask on an already existing project. Will throw
+   * an error if the project is not defined.
+   * @param subtask - the subtask to create
+   */
+  public createSubtask(subtask: Subtask): Observable<Subtask> {
+    return this.http.post<Subtask>(`${environment.api}/subtasks/`, subtask).pipe(map(Subtask.fromJson));
+  }
+
+  /**
+   * PUT a changed subtask to update on the server
    * @param subtask - the subtask to update
    */
   public updateSubtask(subtask: Subtask): Observable<Subtask> {
     return this.http.put<Subtask>(`${environment.api}/subtasks/${subtask.id}/`, subtask).pipe(map(Subtask.fromJson));
+  }
+
+  /**
+   * DELETE a subtask on a project on server and remove from the project array
+   * @param subtas - the subtask to delete
+   */
+  public deleteSubtask(subtask: Subtask): Observable<any> {
+    return this.http.delete<Subtask>(`${environment.api}/subtasks/${subtask.id}/`).pipe(
+      tap(() => {
+        // Remove the subtask from the project object on deletion
+        const project = this.projectsArray.filter(p => p.id === subtask.project)[0];
+        for (let i = 0; i < project.subtasks.length; i++) {
+          const s = project.subtasks[i];
+          if (s.id === subtask.id && s.project === project.id) {
+            // Remove the subtask from the actual project object
+            project.subtasks.splice(i, 1);
+            break;
+          }
+        }
+      })
+    );
   }
 }

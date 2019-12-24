@@ -8,5 +8,6 @@ router.register('projects', ProjectViewSet, 'projects')
 
 urlpatterns = router.urls
 urlpatterns += [
+    path('subtasks/', SubtaskViewSet.as_view({'post': 'create'})),
     path('subtasks/<int:pk>/', SubtaskViewSet.as_view({'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}))
 ]
