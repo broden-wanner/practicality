@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# Activate virtual environment
+source ./venv/scripts/activate
+
 # Run migrations
 python manage.py makemigrations
 python manage.py migrate
