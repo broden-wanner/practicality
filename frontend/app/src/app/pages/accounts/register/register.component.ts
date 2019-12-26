@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/core/authorization/auth.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    public toastController: ToastController
+    private toastService: ToastService
   ) {}
 
   public ngOnInit(): void {
@@ -37,22 +38,8 @@ export class RegisterComponent implements OnInit {
     this.authService.register(credentials).subscribe(
       () => this.router.navigate(['']),
       err => {
-        console.log(err.error);
-        this.presentToast('There are some errors in registrations. See above.');
+        this.toastService.sendMessage('There are some errors in registrations. See above.', 'danger');
       }
     );
-  }
-
-  /**
-   * Presents the toast to the user
-   */
-  public async presentToast(msg: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      showCloseButton: true,
-      color: 'danger',
-      duration: 4000
-    });
-    toast.present();
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Subtask } from 'src/app/shared/models/subtask';
 import { ProjectService } from '../project.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Project } from 'src/app/shared/models/project';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-subtask',
@@ -13,10 +14,21 @@ export class SubtaskComponent implements OnInit {
   @Input() subtask: Subtask;
   subtaskForm: FormGroup;
 
-  constructor(private projectService: ProjectService, private fb: FormBuilder, private elementRef: ElementRef) {}
+  constructor(
+    private projectService: ProjectService,
+    private fb: FormBuilder,
+    private elementRef: ElementRef,
+    private toastService: ToastService
+  ) {}
 
-  ngOnInit() {
-    this.subtaskForm = this.fb.group(this.subtask);
+  ngOnInit(): void {
+    this.subtaskForm = this.fb.group({
+      id: this.subtask.id,
+      name: this.subtask.name,
+      completed: this.subtask.completed,
+      dateToComplete: [this.subtask.dateToComplete, Validators.required],
+      project: this.subtask.project
+    });
   }
 
   /**
@@ -34,6 +46,7 @@ export class SubtaskComponent implements OnInit {
   public enterEdit(): void {
     this.subtask.editing = true;
     // Focus on the input element
+    // Must be on a timeout to wait for the input to appear
     setTimeout(() => {
       const nameInput = this.elementRef.nativeElement.querySelector('input[type="text"]');
       nameInput.focus();
@@ -53,9 +66,14 @@ export class SubtaskComponent implements OnInit {
       this.projectService.updateSubtask(this.subtask).subscribe();
     } else {
       // Create a new subtask and set this one to be the returned subtask
-      this.projectService.createSubtask(this.subtask).subscribe(newSubtask => {
-        this.subtask.setEqualTo(newSubtask);
-      });
+      this.projectService.createSubtask(this.subtask).subscribe(
+        newSubtask => {
+          this.subtask.setEqualTo(newSubtask);
+        },
+        error => {
+          this.toastService.sendMessage('There was an error, please try again', 'danger', 2000);
+        }
+      );
     }
   }
 

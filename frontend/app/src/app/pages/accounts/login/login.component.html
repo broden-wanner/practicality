@@ -15,11 +15,11 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="login-form">
         <ion-item>
           <ion-label position="floating">Username</ion-label>
-          <ion-input formControlName="username" type="text"></ion-input>
+          <ion-input formControlName="username" type="text" required="true"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Password</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-input formControlName="password" type="password" required="true"></ion-input>
         </ion-item>
 
         <div class="login-button-container">
@@ -31,6 +31,4 @@
       <p>New to Practicality? <a routerLink="/account/register">Create an account.</a></p>
     </ion-card>
   </div>
-
-  <ion-toast-controller></ion-toast-controller>
 </ion-content>

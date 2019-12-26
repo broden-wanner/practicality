@@ -28,7 +28,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FormsModule, IonicModule, RouterModule.forChild(routes)],
-  declarations: [LoginComponent, AccountComponent, RegisterComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  declarations: [LoginComponent, AccountComponent, RegisterComponent]
 })
 export class AccountsModule {}

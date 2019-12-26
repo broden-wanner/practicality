@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/authorization/auth.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +16,14 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    public toastController: ToastController
+    private toastService: ToastService
   ) {}
 
   public ngOnInit(): void {
+    // Initialize the login form at the start
     this.loginForm = this.fb.group({
-      username: '',
-      password: ''
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
@@ -30,23 +31,17 @@ export class LoginComponent implements OnInit {
    * Attempts to log the user in with the given form data
    */
   public onSubmit(): void {
+    if (this.loginForm.status === 'INVALID') {
+      this.toastService.sendMessage('Incorrect credentials', 'danger');
+      return;
+    }
     const credentials = this.loginForm.value;
     this.authService.login(credentials).subscribe(
-      () => this.router.navigate(['']),
-      () => this.presentToast()
+      succcess => {
+        this.toastService.sendMessage('Login successful', 'success', 2000);
+        this.router.navigate(['']);
+      },
+      error => this.toastService.sendMessage('Incorrect credentials', 'danger')
     );
-  }
-
-  /**
-   * Presents the toast to the user
-   */
-  public async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Incorrect credentials',
-      showCloseButton: true,
-      color: 'danger',
-      duration: 4000
-    });
-    toast.present();
   }
 }
