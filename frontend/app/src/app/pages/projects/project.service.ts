@@ -47,7 +47,7 @@ export class ProjectService {
 
   /**
    * Makes a POST request to the api to make a new project.
-   * Once successful, add the project to the projects array
+   * Once successful, add the new project to the projects array
    * @param project - the new project object
    */
   public createProject(project: Project): Observable<Project> {
@@ -60,7 +60,7 @@ export class ProjectService {
   /**
    * POSTs a new subtask on an already existing project. Will throw
    * an error if the project is not defined. The caller should handle
-   * the adding of the subtask to the project
+   * the adding of the subtask to the project.
    * @param subtask - the subtask to create
    */
   public createSubtask(subtask: Subtask): Observable<Subtask> {
