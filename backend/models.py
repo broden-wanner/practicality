@@ -30,7 +30,7 @@ class Project(models.Model):
 class Subtask(models.Model):
     project = models.ForeignKey(Project, related_name='subtasks', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    dateToComplete = models.DateTimeField()
+    dateToComplete = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     
     def __str__(self):

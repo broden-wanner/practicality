@@ -40,9 +40,6 @@ export class Subtask {
     if (!project) {
       throw new Error('Project to add subtask to cannot be null.');
     }
-    if (project.id <= 0) {
-      throw new Error('Project id cannot be <= 0.');
-    }
     return new Subtask(0, '', false, '', project.id);
   }
 

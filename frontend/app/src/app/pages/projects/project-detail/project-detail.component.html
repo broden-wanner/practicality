@@ -1,4 +1,4 @@
-<div class="project-form-container">
+<ion-card class="project-form-container">
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="project-form">
     <ion-item>
       <ion-label position="floating">Project title</ion-label>
@@ -14,10 +14,18 @@
     </ion-item>
     <ion-item>
       <ion-label>Subtasks</ion-label>
+      <ion-button fill="clear" color="dark" class="icon-only-button" (click)="newSubtask()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
     </ion-item>
+    <app-subtask-list
+      [project]="project"
+      [newSubtaskEvent]="newSubtaskEvent.asObservable()"
+      [forNewProject]="true"
+    ></app-subtask-list>
 
     <div class="create-button-container">
       <ion-button type="submit">Create</ion-button>
     </div>
   </form>
-</div>
+</ion-card>

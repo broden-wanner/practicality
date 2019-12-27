@@ -2,9 +2,17 @@
   <p class="project-title">{{ project.title }}</p>
   <ion-progress-bar [value]="project.progress"></ion-progress-bar>
   <p class="progress-text">{{ project.progress | percent }}</p>
-  <ion-icon slot="end" name="add" (click)="$event.stopPropagation(); newSubtask()"></ion-icon>
-  <ion-icon slot="end" name="more"></ion-icon>
+  <ion-button fill="clear" color="dark" class="icon-only-button" (click)="$event.stopPropagation(); newSubtask()">
+    <ion-icon slot="icon-only" name="add"></ion-icon>
+  </ion-button>
+  <ion-button fill="clear" color="dark" class="icon-only-button">
+    <ion-icon slot="icon-only" name="more"></ion-icon>
+  </ion-button>
 </ion-item>
 <ng-container *ngIf="!project.collapsed">
-  <app-subtask-list [project]="project" [newSubtaskEvent]="newSubtaskEvent.asObservable()"></app-subtask-list>
+  <app-subtask-list
+    [project]="project"
+    [newSubtaskEvent]="newSubtaskEvent.asObservable()"
+    [forNewProject]="false"
+  ></app-subtask-list>
 </ng-container>

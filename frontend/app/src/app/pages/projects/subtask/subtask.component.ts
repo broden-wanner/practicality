@@ -11,7 +11,9 @@ import { ToastService } from 'src/app/shared/services/toast.service';
   styleUrls: ['./subtask.component.scss']
 })
 export class SubtaskComponent implements OnInit {
+  @Input() forNewProject: boolean;
   @Input() subtask: Subtask;
+  @Input() project: Project;
   subtaskForm: FormGroup;
 
   constructor(
@@ -60,6 +62,12 @@ export class SubtaskComponent implements OnInit {
   public saveSubtask(): void {
     this.subtask.editing = false;
     this.subtask = Subtask.fromJson(this.subtaskForm.value);
+
+    // If this subtask is for a new project, only add it to the subtask array of the project
+    if (this.forNewProject) {
+      return;
+    }
+
     // If there is no id, then create a new subtask
     if (this.subtask.id) {
       // Simply update the subtask
@@ -71,6 +79,7 @@ export class SubtaskComponent implements OnInit {
           this.subtask.setEqualTo(newSubtask);
         },
         error => {
+          console.error(error);
           this.toastService.sendMessage('There was an error, please try again', 'danger', 2000);
         }
       );

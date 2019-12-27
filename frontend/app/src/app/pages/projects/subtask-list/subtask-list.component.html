@@ -1,1 +1,6 @@
-<app-subtask *ngFor="let subtask of project.subtasks" [subtask]="subtask"></app-subtask>
+<app-subtask
+  *ngFor="let subtask of project.subtasks"
+  [subtask]="subtask"
+  [project]="project"
+  [forNewProject]="forNewProject"
+></app-subtask>

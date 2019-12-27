@@ -7,19 +7,18 @@
     ></ion-icon>
     <ion-label (click)="enterEdit()">{{ subtask.name }}</ion-label>
     <ion-label (click)="enterEdit()" class="subtask-date">{{ subtask.dateToComplete | date: 'MMM d, y' }}</ion-label>
-    <ion-icon (click)="deleteSubtask()" name="close"></ion-icon>
+    <ion-button fill="clear" color="dark" (click)="deleteSubtask()" class="icon-only-button">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
   </ion-item>
 </ng-container>
 <form *ngIf="subtask.editing" [formGroup]="subtaskForm">
   <ion-item>
     <ion-icon [name]="subtask.completed ? 'checkmark-circle-outline' : 'radio-button-off'" slot="start"></ion-icon>
-    <ion-input
-      formControlName="name"
-      class="subtask-name-input"
-      type="text"
-      placeholder="Name"
-      (ionBlur)="saveSubtask()"
-    ></ion-input>
+    <ion-input formControlName="name" class="subtask-name-input" type="text" placeholder="Name"></ion-input>
     <ion-datetime formControlName="dateToComplete" placeholder="Date"></ion-datetime>
+    <ion-button fill="clear" color="dark" (click)="saveSubtask()" class="icon-only-button">
+      <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+    </ion-button>
   </ion-item>
 </form>

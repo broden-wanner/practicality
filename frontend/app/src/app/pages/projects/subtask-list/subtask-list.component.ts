@@ -9,6 +9,7 @@ import { Subtask } from 'src/app/shared/models/subtask';
   styleUrls: ['./subtask-list.component.scss']
 })
 export class SubtaskListComponent implements OnInit {
+  @Input() forNewProject: boolean;
   @Input() project: Project;
   @Input() newSubtaskEvent: Observable<void>;
 
