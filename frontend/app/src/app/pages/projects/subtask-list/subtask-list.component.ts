@@ -20,7 +20,7 @@ export class SubtaskListComponent implements OnInit {
   }
 
   /**
-   * Create a new empty subtask on the project and append it to the host container
+   * Create a new empty subtask on the project and append it to the list of subtasks on the project
    */
   public makeSubtask(): void {
     const newSubtask = Subtask.emptySubtaskOn(this.project);

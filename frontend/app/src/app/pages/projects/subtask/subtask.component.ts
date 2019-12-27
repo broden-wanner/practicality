@@ -61,7 +61,7 @@ export class SubtaskComponent implements OnInit {
    */
   public saveSubtask(): void {
     this.subtask.editing = false;
-    this.subtask = Subtask.fromJson(this.subtaskForm.value);
+    this.subtask.setEqualTo(Subtask.fromJson(this.subtaskForm.value));
 
     // If this subtask is for a new project, only add it to the subtask array of the project
     if (this.forNewProject) {
@@ -71,7 +71,13 @@ export class SubtaskComponent implements OnInit {
     // If there is no id, then create a new subtask
     if (this.subtask.id) {
       // Simply update the subtask
-      this.projectService.updateSubtask(this.subtask).subscribe();
+      this.projectService.updateSubtask(this.subtask).subscribe(
+        () => {},
+        error => {
+          console.error(error);
+          this.toastService.sendMessage('Error while updating', 'danger');
+        }
+      );
     } else {
       // Create a new subtask and set this one to be the returned subtask
       this.projectService.createSubtask(this.subtask).subscribe(
