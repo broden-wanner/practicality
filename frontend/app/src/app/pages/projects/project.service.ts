@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProjectService {
   private projects = new BehaviorSubject<Project[]>(new Array<Project>());
-  private projectsArray: Project[];
+  private projectsArray: Array<Project>;
 
   constructor(private http: HttpClient) {}
 
@@ -46,16 +46,21 @@ export class ProjectService {
   }
 
   /**
-   * Makes a POST request to the api to make a new project
+   * Makes a POST request to the api to make a new project.
+   * Once successful, add the project to the projects array
    * @param project - the new project object
    */
   public createProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(`${environment.api}/projects/`, project).pipe(map(Project.fromJson));
+    return this.http.post<Project>(`${environment.api}/projects/`, project).pipe(
+      map(Project.fromJson),
+      tap(p => this.projectsArray.push(p))
+    );
   }
 
   /**
    * POSTs a new subtask on an already existing project. Will throw
-   * an error if the project is not defined.
+   * an error if the project is not defined. The caller should handle
+   * the adding of the subtask to the project
    * @param subtask - the subtask to create
    */
   public createSubtask(subtask: Subtask): Observable<Subtask> {
