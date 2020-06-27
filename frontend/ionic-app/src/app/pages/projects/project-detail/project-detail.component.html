@@ -1,0 +1,36 @@
+<ion-card class="project-form-container">
+  <form
+    [formGroup]="projectForm"
+    (ngSubmit)="onSubmit()"
+    (keyup.enter)="onSubmit()"
+    class="project-form"
+  >
+    <ion-item>
+      <ion-label position="floating">Project title</ion-label>
+      <ion-input formControlName="title" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input formControlName="description" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Date to Complete</ion-label>
+      <ion-datetime formControlName="dateToComplete"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Subtasks</ion-label>
+      <ion-button fill="clear" color="dark" class="icon-only-button" (click)="newSubtask()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <app-subtask-list
+      [project]="project"
+      [newSubtaskEvent]="newSubtaskEvent.asObservable()"
+      [forNewProject]="true"
+    ></app-subtask-list>
+
+    <div class="create-button-container">
+      <ion-button type="submit">Create</ion-button>
+    </div>
+  </form>
+</ion-card>

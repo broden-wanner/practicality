@@ -1,0 +1,8 @@
+<ion-content ion-padding>
+  <div *ngIf="(projects | async).length === 0">
+    <p class="no-projects-text">You have no projects. Make a new one above!</p>
+  </div>
+  <ion-list class="list-container">
+    <app-project *ngFor="let project of projects | async" [project]="project"></app-project>
+  </ion-list>
+</ion-content>

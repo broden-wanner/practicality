@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .center-col {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .login-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--default-padding);
+    margin-top: 40px;
+
+    .login-form {
+      max-width: 400px;
+      width: 100%;
+    }
+  }
+
+  .register-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px var(--default-padding);
+    margin-top: 20px;
+  }
+}
+
+.login-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--default-margin);
+}
