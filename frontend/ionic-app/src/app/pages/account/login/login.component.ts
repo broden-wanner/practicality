@@ -39,9 +39,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(credentials).subscribe(
       (succcess) => {
         this.toastService.sendMessage('Login successful', 'success', 2000);
-        this.router.navigate(['']);
+        this.router.navigate(['/dashboard']);
       },
-      (error) => this.toastService.sendMessage('Incorrect credentials', 'danger')
+      (error) => this.toastService.sendMessage('Incorrect credentials', 'danger', 2000)
     );
   }
 }

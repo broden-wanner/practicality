@@ -6,37 +6,21 @@
     <ion-title>
       Notes
     </ion-title>
-    <ion-note class="saved-status" slot="end">
-      <ng-container *ngIf="saved; else loading">
-        All changes saved
-      </ng-container>
-      <ng-template #loading> <span class="saved-status-text">Saving</span> <ion-spinner></ion-spinner> </ng-template>
-    </ion-note>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="list-and-editor-container">
+  <div class="notes-container">
     <!-- List of notes -->
-    <ion-list class="list-container">
+    <ion-list class="notes-container__list">
       <ion-item
         *ngFor="let note of notes | async"
-        (click)="selectNote(note)"
-        [class.active-note]="isActive(note)"
+        [routerLink]="['/notes/', note.id]"
         button
         detail
       >
         <ion-label>{{ note.dateCreated | date: 'EEEE, MMMM d, y' }}</ion-label>
       </ion-item>
     </ion-list>
-
-    <!-- Note detail component -->
-    <div class="note-container">
-      <app-note-detail
-        [note]="activeNote"
-        (saveEvent)="updateSavedState($event)"
-        (loadEvent)="updateLoadedState($event)"
-      ></app-note-detail>
-    </div>
   </div>
 </ion-content>

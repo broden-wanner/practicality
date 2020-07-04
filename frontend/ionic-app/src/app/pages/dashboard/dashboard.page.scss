@@ -8,8 +8,12 @@
   background-position: center;
   background-size: cover;
   height: 100%;
+  display: flex;
+  justify-content: center;
 
   &__content {
     padding: 20px;
+    width: 100%;
+    max-width: var(--max-content-width);
   }
 }

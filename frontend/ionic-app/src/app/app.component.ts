@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from './core/authorization/auth.service';
+import { User } from './shared/models/user';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +12,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
+  public user: User;
   public appPages = [
     {
       title: 'Dashboard',
       url: '/dashboard',
-      icon: 'book',
+      icon: 'apps',
     },
     {
       title: 'Notes',
@@ -37,12 +39,23 @@ export class AppComponent implements OnInit {
       url: '/listening',
       icon: 'radio',
     },
+    {
+      title: 'Library',
+      url: '/library',
+      icon: 'book',
+    },
+    {
+      title: 'Account & Settings',
+      url: '/account/view',
+      icon: 'person',
+    },
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
@@ -60,12 +73,24 @@ export class AppComponent implements OnInit {
   /**
    * Perform the initial app initialization here
    */
-  ngOnInit() {
-    const path = window.location.pathname.split('/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(
-        (page) => page.title.toLowerCase() === path.toLowerCase()
-      );
-    }
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  /**
+   * Gets the user for display by subscribing to auth service user observable
+   */
+  public getUser(): void {
+    this.authService.getCurrentUserObs().subscribe((user) => {
+      this.user = user;
+    });
+  }
+
+  /**
+   * Tells whether a user is logged in or not
+   * @returns a boolean of the authorization status
+   */
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardPage } from './dashboard.page';
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { LibraryPage } from './library.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardPage,
-  },
+    component: LibraryPage
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashboardPageRoutingModule {}
+export class LibraryPageRoutingModule {}

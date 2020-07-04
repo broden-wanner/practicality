@@ -1,0 +1,16 @@
+<ion-card class="main-card">
+  <ion-card-header>
+    <ion-card-title>Practicality</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>
+      Designed for the classical musician with organization in mind.
+    </p>
+    <div *ngIf="showButtons" class="button-container">
+      <ion-button class="button-container__login" routerLink="/account/login">Login</ion-button>
+      <ion-button class="button-container__signup" routerLink="/account/register"
+        >Sign Up</ion-button
+      >
+    </div>
+  </ion-card-content>
+</ion-card>

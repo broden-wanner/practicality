@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+    <ion-menu *ngIf="isLoggedIn()" contentId="main-content" type="overlay">
       <ion-header>
         <ion-toolbar>
           <ion-title>Practicality</ion-title>
@@ -31,4 +31,5 @@
 
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
+  <app-toast></app-toast>
 </ion-app>

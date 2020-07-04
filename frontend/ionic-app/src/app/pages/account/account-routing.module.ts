@@ -5,11 +5,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from '../../core/guards/auth.guard';
 import { AccountViewComponent } from './view/account.component';
+import { RedirectIfAuthenticatedGuard } from 'src/app/core/guards/redirect-if-authenticated.guard';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [RedirectIfAuthenticatedGuard],
   },
   {
     path: 'view',
@@ -19,6 +21,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [RedirectIfAuthenticatedGuard],
   },
 ];
 

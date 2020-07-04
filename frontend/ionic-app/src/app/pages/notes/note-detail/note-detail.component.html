@@ -1,11 +1,32 @@
-<ng-container *ngIf="note; else loading">
-  <ion-content [formGroup]="noteForm">
-    <div class="editor-container">
-      <quill-editor formControlName="body"></quill-editor>
-    </div>
-  </ion-content>
-</ng-container>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/notes"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="note">
+      {{ note.dateCreated | date: 'EEEE, MMMM d, y' }}
+    </ion-title>
+    <ion-note class="saved-status" slot="end">
+      <ng-container *ngIf="saved; else loading">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </ng-container>
+      <ng-template #loading>
+        <ion-spinner></ion-spinner>
+      </ng-template>
+    </ion-note>
+  </ion-toolbar>
+</ion-header>
 
-<ng-template #loading>
-  <ion-spinner name="crescent"></ion-spinner>
-</ng-template>
+<ion-content>
+  <ng-container *ngIf="note; else loading">
+    <ion-content [formGroup]="noteForm">
+      <div class="editor-container">
+        <quill-editor formControlName="body"></quill-editor>
+      </div>
+    </ion-content>
+  </ng-container>
+
+  <ng-template #loading>
+    <ion-spinner name="crescent"></ion-spinner>
+  </ng-template>
+</ion-content>

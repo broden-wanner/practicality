@@ -1,40 +1,41 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { NotesService } from '../notes.service';
 import { Note } from '../../../shared/models/note';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, tap, delay } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-note-detail',
   templateUrl: './note-detail.component.html',
-  styleUrls: ['./note-detail.component.scss']
+  styleUrls: ['./note-detail.component.scss'],
 })
-export class NoteDetailComponent implements OnInit, OnChanges {
-  @Input() note: Note;
-  @Output() saveEvent = new EventEmitter<boolean>();
-  @Output() loadEvent = new EventEmitter<boolean>();
+export class NoteDetailComponent implements OnInit {
+  note: Note;
   saved = false;
   loaded = false;
   noteForm: FormGroup;
 
-  constructor(private notesService: NotesService, private fb: FormBuilder) {
+  constructor(
+    private notesService: NotesService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute
+  ) {
     // Initialize the form with an empty body
     this.noteForm = this.fb.group({ body: '' });
   }
 
   public ngOnInit(): void {
-    // Initialize the form and subscribe to note changes
-    this.onNoteChanges();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.note.currentValue) {
-      // If the input note is changes, reset the form
-      this.loaded = false;
-      this.loadEvent.emit(false);
-      this.noteForm.setValue({ body: changes.note.currentValue.body });
-    }
+    // Get the note
+    this.route.paramMap.subscribe((params) => {
+      this.notesService.getNote(Number(params.get('noteId'))).subscribe((note) => {
+        this.note = note;
+        // Set the form body and subscribe to note changes
+        this.noteForm.setValue({ body: this.note.body });
+        this.onNoteChanges();
+      });
+    });
   }
 
   /**
@@ -46,28 +47,22 @@ export class NoteDetailComponent implements OnInit, OnChanges {
       .pipe(
         // Must be called to prevent error
         delay(0),
-        // Set the saveEvent state
+        // Set the saved state
         tap(() => {
           if (this.loaded === false) {
-            // Since valueChanges is called on the initial loading of the form,
-            // we must set the loaded state here
             this.loaded = true;
-            this.loadEvent.emit(true);
           } else {
-            // Otherwise, set the saved state here
             this.saved = false;
-            this.saveEvent.emit(false);
           }
         }),
         // Debouce the user input time
         debounceTime(1000)
       )
       .subscribe((val: any) => {
+        console.log(val);
         this.note.body = val.body ? val.body : '';
         this.notesService.updateNote(this.note).subscribe(() => {
-          // Emit a saveEvent value once done
           this.saved = true;
-          this.saveEvent.emit(true);
         });
       });
   }

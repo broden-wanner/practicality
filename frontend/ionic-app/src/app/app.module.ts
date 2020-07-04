@@ -13,6 +13,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthService } from './core/authorization/auth.service';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { ToastService } from './shared/services/toast.service';
 
 @NgModule({
   declarations: [AppComponent, ToastComponent],
@@ -21,6 +22,7 @@ import { ToastComponent } from './shared/components/toast/toast.component';
   providers: [
     AuthService,
     AuthGuard,
+    ToastService,
     StatusBar,
     SplashScreen,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

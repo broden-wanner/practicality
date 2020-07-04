@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import permissions
@@ -30,6 +31,7 @@ class NoteViewSet(viewsets.ModelViewSet):
         queryset = Note.objects.filter(user=self.request.user)
         try:
             latest_note = queryset.latest('date_created')
+            print(latest_note.date_created.date(), datetime.date.today())
             if latest_note.date_created.date() < datetime.date.today() and isinstance(request.user, CustomUser):
                 new_note = Note.objects.create(user=request.user, body='')
                 # Redo the query to include the new note

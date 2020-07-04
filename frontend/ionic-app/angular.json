@@ -32,12 +32,11 @@
               }
             ],
             "styles": [
-              {
-                "input": "src/theme/variables.scss"
-              },
-              {
-                "input": "src/global.scss"
-              }
+              { "input": "./node_modules/quill/dist/quill.core.css" },
+              { "input": "./node_modules/quill/dist/quill.bubble.css" },
+              { "input": "./node_modules/quill/dist/quill.snow.css" },
+              { "input": "src/theme/variables.scss" },
+              { "input": "src/global.scss" }
             ],
             "scripts": ["./node_modules/moment/min/moment.min.js"]
           },

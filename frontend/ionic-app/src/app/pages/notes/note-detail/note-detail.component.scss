@@ -1,3 +1,14 @@
 .editor-container {
   height: 100%;
 }
+
+.saved-status {
+  display: flex;
+  align-items: center;
+  padding-right: var(--default-padding);
+  font-size: 25px;
+}
+
+.saved-status-text {
+  padding-right: 5px;
+}

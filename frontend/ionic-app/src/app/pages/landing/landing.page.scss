@@ -1,0 +1,28 @@
+.landing {
+  background-image: url('/assets/music-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+
+  &__content {
+    max-width: 1045px;
+    margin: auto;
+    padding: 0 20px;
+  }
+}
+
+/* Without setting height the slides will take up the height of the slide's content */
+ion-slides {
+  height: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--default-margin);
+
+  &__login {
+    margin-right: 10px;
+  }
+}
