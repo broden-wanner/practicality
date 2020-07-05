@@ -1,10 +1,11 @@
 from django.urls import path
 from rest_framework import routers
-from backend.api import NoteViewSet, ProjectViewSet, SubtaskViewSet
+from backend.views import NoteViewSet, ProjectViewSet, SubtaskViewSet, LibraryUploadViewSet
 
 router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')
 router.register('projects', ProjectViewSet, 'projects')
+router.register('library-uploads', LibraryUploadViewSet, 'library-uploads')
 
 urlpatterns = router.urls
 urlpatterns += [

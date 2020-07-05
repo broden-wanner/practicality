@@ -1,5 +1,5 @@
 from django.urls import path, include
-from accounts.api import RegisterAPI, LoginAPI, UserAPI
+from accounts.views import RegisterAPI, LoginAPI, UserAPI
 from knox import views as know_views
 from rest_framework import routers
 

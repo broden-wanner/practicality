@@ -181,3 +181,10 @@ if ENV_ROLE == 'production':
     STATICFILES_DIRS = []
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'frontend', 'dist')
+
+
+# User-Uploaded Media
+# https://docs.djangoproject.com/en/3.0/topics/files/
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

@@ -1,0 +1,34 @@
+<ion-content>
+  <div class="upload-container">
+    <h1>Upload your music</h1>
+    <div class="upload-container__form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="name" type="text" required="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-input formControlName="description" type="text" required="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-button (click)="fileInput.click()">
+            <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+            <ion-label slot="end">Music</ion-label>
+          </ion-button>
+          <input
+            #fileInput
+            class="ion-hide"
+            type="file"
+            name="library_file"
+            (change)="onChange($event)"
+          />
+        </ion-item>
+
+        <div class="submit-container">
+          <ion-button type="submit">Upload</ion-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

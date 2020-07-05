@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-library',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./library.page.scss'],
 })
 export class LibraryPage implements OnInit {
+  constructor(public modalController: ModalController) {}
 
-  constructor() { }
-
-  ngOnInit() {
+  public async openUploadModal() {
+    const modal = await this.modalController.create({
+      component: UploadFileComponent,
+    });
+    return await modal.present();
   }
 
+  ngOnInit() {}
 }

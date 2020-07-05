@@ -41,3 +41,16 @@ class Habit(models.Model):
 
     def __str__(self):
         return f'Habit {self.name}'
+
+def user_directory_path(instance, filename):
+    return f'music_library/user_{instance.user.username}/{filename}'
+
+class LibraryUpload(models.Model):
+    name = models.CharField(max_length=200)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    description = models.CharField(max_length=200)
+    library_file = models.FileField(upload_to=user_directory_path)
+
+    def __str__(self):
+        return f'{self.user.username} upload: {self.library_file}'
+    

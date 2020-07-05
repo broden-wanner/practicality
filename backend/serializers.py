@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from backend.models import Note, Project, Subtask
+from backend.models import Note, Project, Subtask, LibraryUpload
 
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,3 +41,19 @@ class ProjectSerializer(serializers.ModelSerializer):
     #     instance.save()
 
     #     return instance
+
+class LibraryUploadSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = LibraryUpload
+        fields = '__all__'
+
+    def create(self, validated_data):
+        """
+        Override the create method to add the user
+        """
+        upload = LibraryUpload.objects.create(user=self.context['request'].user, **validated_data)
+        return upload
+
+    
