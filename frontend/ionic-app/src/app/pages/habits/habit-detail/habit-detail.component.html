@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/habits"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{ isNewHabit ? 'Create' : 'Update' }} Habit </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="habit-form-container">
+    <form
+      [formGroup]="habitForm"
+      (ngSubmit)="onSubmit()"
+      (keyup.enter)="onSubmit()"
+      class="habit-form"
+    >
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+
+      <div class="submit-button-container">
+        <ion-button type="submit">{{ isNewHabit ? 'Create' : 'Update' }}</ion-button>
+      </div>
+    </form>
+  </ion-card>
+</ion-content>

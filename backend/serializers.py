@@ -1,16 +1,19 @@
 from rest_framework import serializers
-from backend.models import Note, Project, Subtask, LibraryUpload
+from .models import *
+
 
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__'
 
+
 class SubtaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subtask
         fields = '__all__'
         # read_only_fields = ('project',) # Must be read only because the project will create it
+
 
 class ProjectSerializer(serializers.ModelSerializer):
     subtasks = SubtaskSerializer(many=True, read_only=False)
@@ -42,18 +45,17 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     #     return instance
 
-class LibraryUploadSerializer(serializers.ModelSerializer):
+
+class HabitSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
-        model = LibraryUpload
+        model = Habit
         fields = '__all__'
 
     def create(self, validated_data):
         """
         Override the create method to add the user
         """
-        upload = LibraryUpload.objects.create(user=self.context['request'].user, **validated_data)
-        return upload
-
-    
+        habit = Habit.objects.create(user=self.context['request'].user, **validated_data)
+        return habit

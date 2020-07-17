@@ -41,10 +41,6 @@ const routes: Routes = [
       import('./pages/listening/listening.module').then((m) => m.ListeningPageModule),
     canActivate: [AuthGuard],
   },
-  {
-    path: 'library',
-    loadChildren: () => import('./pages/library/library.module').then((m) => m.LibraryPageModule),
-  },
 ];
 
 @NgModule({

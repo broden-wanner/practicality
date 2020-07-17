@@ -2,10 +2,10 @@ import datetime
 from django.utils import timezone
 from rest_framework import viewsets, generics, permissions
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
-from backend.models import Note, Project, Subtask, LibraryUpload
-from backend.serializers import NoteSerializer, ProjectSerializer, SubtaskSerializer, LibraryUploadSerializer
 from accounts.models import CustomUser
+from .models import *
+from .serializers import *
+
 
 class NoteViewSet(viewsets.ModelViewSet):
     """
@@ -37,10 +37,11 @@ class NoteViewSet(viewsets.ModelViewSet):
         except Note.DoesNotExist:
             first_note = Note.objects.create(user=request.user, body='')
             queryset = [first_note]
-            
+
         serializer = NoteSerializer(queryset, many=True)
-        
+
         return Response(serializer.data)
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
     """
@@ -57,6 +58,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         """
         return Project.objects.filter(user=self.request.user)
 
+
 class SubtaskViewSet(viewsets.ModelViewSet):
     """
     A viewset for viewing and editing subtasks on projects
@@ -72,21 +74,21 @@ class SubtaskViewSet(viewsets.ModelViewSet):
         """
         return Subtask.objects.filter(project__user=self.request.user)
 
-class LibraryUploadViewSet(viewsets.ModelViewSet):
+
+class HabitViewSet(viewsets.ModelViewSet):
     """
-    A viewset for viewing and editing library uploads
+    A viewset for viewing and editing habits
     """
-    serializer_class = LibraryUploadSerializer
-    # Users must be authenticated to view library uploads
+    serializer_class = HabitSerializer
+    # Users must be authenticated to view subtasks
     permission_classes = [permissions.IsAuthenticated]
-    parser_classes = [FormParser, MultiPartParser]
 
     def get_queryset(self):
         """
         Override the get_queryset method to return only those
-        library uploads which belong to the user
+        habits which belong to the user
         """
-        return LibraryUpload.objects.filter(user=self.request.user)
+        return Habit.objects.filter(user=self.request.user)
 
     def get_serializer_context(self):
         """

@@ -1,14 +1,15 @@
 from django.urls import path
 from rest_framework import routers
-from backend.views import NoteViewSet, ProjectViewSet, SubtaskViewSet, LibraryUploadViewSet
+from .views import *
 
 router = routers.DefaultRouter()
-router.register('notes', NoteViewSet, 'notes')
-router.register('projects', ProjectViewSet, 'projects')
-router.register('library-uploads', LibraryUploadViewSet, 'library-uploads')
+router.register('notes', NoteViewSet, basename='notes')
+router.register('projects', ProjectViewSet, basename='projects')
+router.register('habits', HabitViewSet, basename='habits')
 
-urlpatterns = router.urls
-urlpatterns += [
+urlpatterns = router.urls + [
     path('subtasks/', SubtaskViewSet.as_view({'post': 'create'})),
-    path('subtasks/<int:pk>/', SubtaskViewSet.as_view({'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}))
+    path('subtasks/<int:pk>/', SubtaskViewSet.as_view({'put': 'update',
+                                                       'patch': 'partial_update',
+                                                       'delete': 'destroy'}))
 ]

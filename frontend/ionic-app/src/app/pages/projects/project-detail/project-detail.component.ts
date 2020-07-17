@@ -31,6 +31,8 @@ export class ProjectDetailComponent implements OnInit {
 
   /**
    * Creates a new project from the form and submits it to the server
+   *
+   * @returns {void}
    */
   public onSubmit(): void {
     const project = Project.fromJson(this.projectForm.value);
@@ -45,6 +47,9 @@ export class ProjectDetailComponent implements OnInit {
 
   /**
    * Emit a signal to the subtask list to create a new subtask component
+   *
+   * @emits newSubtaskEvent
+   * @returns {void}
    */
   public newSubtask(): void {
     this.newSubtaskEvent.next();

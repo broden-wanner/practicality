@@ -7,6 +7,8 @@ from django.core.exceptions import ImproperlyConfigured
 load_dotenv()
 
 # Handling Key Import Errors
+
+
 def get_env_variable(var_name):
     """ Get the environment variable or return exception """
     try:
@@ -14,6 +16,7 @@ def get_env_variable(var_name):
     except KeyError:
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
+
 
 # Get ENV VARIABLES key
 ENV_ROLE = get_env_variable('ENV_ROLE')
@@ -173,10 +176,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'app', 'build')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'ionic-app', 'build')]
 if ENV_ROLE == 'production':
-    # If in production, do not call collectstatic because this will 
-    # create too many files. Instead, build on development env and 
+    # If in production, do not call collectstatic because this will
+    # create too many files. Instead, build on development env and
     # push to the server already in the static root folder
     STATICFILES_DIRS = []
 

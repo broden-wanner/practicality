@@ -40,11 +40,6 @@ export class AppComponent implements OnInit {
       icon: 'radio',
     },
     {
-      title: 'Library',
-      url: '/library',
-      icon: 'book',
-    },
-    {
       title: 'Account & Settings',
       url: '/account/view',
       icon: 'person',

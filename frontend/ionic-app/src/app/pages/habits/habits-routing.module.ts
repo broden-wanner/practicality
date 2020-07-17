@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { HabitsPage } from './habits.page';
+import { HabitListComponent } from './habit-list/habit-list.component';
+import { HabitDetailComponent } from './habit-detail/habit-detail.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HabitsPage
-  }
+    component: HabitListComponent,
+  },
+  {
+    path: 'new',
+    component: HabitDetailComponent,
+  },
+  {
+    path: ':habitId',
+    component: HabitDetailComponent,
+  },
 ];
 
 @NgModule({
