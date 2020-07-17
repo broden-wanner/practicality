@@ -1,7 +1,0 @@
-{
-  "name": "practicality-frontend",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

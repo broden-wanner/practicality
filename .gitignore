@@ -2,8 +2,7 @@
 digitalocean/
 
 ### Custom ignores ###
-frontend/app/build/*
-!frontend/app/build/index.html
+practicality/static
 
 ### NPM ignores ###
 *~
