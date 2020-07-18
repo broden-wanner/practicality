@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Habits
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="habits-container" *ngIf="habits">
+    <ion-list class="habits-container__list">
+      <ion-list-header>
+        To-Do
+      </ion-list-header>
+      <ng-container *ngFor="let habit of toDoHabits">
+        <app-habit [habit]="habit"> </app-habit>
+      </ng-container>
+
+      <ion-label *ngIf="toDoHabits.length === 0" class="help-text">
+        <p><em>All done for today!</em>🎉</p>
+      </ion-label>
+    </ion-list>
+    <ion-list class="habits-container__list">
+      <ion-list-header>
+        Done
+      </ion-list-header>
+      <ng-container *ngFor="let habit of doneHabits">
+        <app-habit [habit]="habit"> </app-habit>
+      </ng-container>
+      <ion-label *ngIf="doneHabits.length === 0" class="help-text">
+        <p><em>Let's get some stuff here</em>🎼</p>
+      </ion-label>
+    </ion-list>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button routerLink="/habits/new">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>

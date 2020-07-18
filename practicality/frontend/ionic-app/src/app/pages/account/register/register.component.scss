@@ -1,0 +1,14 @@
+.register-container {
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+
+  .register-form {
+    width: 100%;
+  }
+}
+
+.register-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--default-margin);
+}

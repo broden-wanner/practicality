@@ -1,0 +1,26 @@
+<ion-item-sliding *ngIf="habit" #habitSliding>
+  <ion-item>
+    <ion-label>
+      <h2>{{ habit.name }}</h2>
+      <p>Created {{ habit.date_created | date: 'MMMM d, y' }}</p>
+      <p>Done {{ habit.days_completed }} times</p>
+      <p *ngIf="habit.last_done">Last done {{ habit.last_done | date: 'MMMM d, y' }}</p>
+    </ion-label>
+
+    <ion-button slot="end" fill="clear" (click)="toggleSlideMenu()">
+      <ion-icon name="ellipsis-horizontal"> </ion-icon
+    ></ion-button>
+  </ion-item>
+
+  <ion-item-options side="end">
+    <ion-item-option color="success" [disabled]="habit.doneToday()">
+      <ion-icon slot="icon-only" (click)="checkHabit()" name="checkmark"></ion-icon>
+    </ion-item-option>
+    <ion-item-option color="primary" (click)="editHabit()">
+      <ion-icon slot="icon-only" name="pencil"></ion-icon>
+    </ion-item-option>
+    <ion-item-option color="danger">
+      <ion-icon slot="icon-only" (click)="deleteHabit()" name="close"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

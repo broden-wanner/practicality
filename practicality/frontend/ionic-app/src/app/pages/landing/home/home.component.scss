@@ -1,0 +1,13 @@
+.main-card {
+  --background: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--default-margin);
+
+  &__login {
+    margin-right: 10px;
+  }
+}

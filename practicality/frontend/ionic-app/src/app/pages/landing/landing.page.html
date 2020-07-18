@@ -1,0 +1,59 @@
+<ng-container *ngIf="isDesktop; else mobile">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title slot="start">Practicality</ion-title>
+      <ion-buttons slot="end">
+        <ion-button routerLink="/">
+          Home
+        </ion-button>
+        <ion-button routerLink="/about">
+          About
+        </ion-button>
+        <ion-button routerLink="/features">
+          Features
+        </ion-button>
+        <ion-button routerLink="/account/login">
+          Login
+        </ion-button>
+        <ion-button routerLink="/account/register">
+          Register
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="landing">
+      <ion-router-outlet class="landing__content"></ion-router-outlet>
+    </div>
+  </ion-content>
+</ng-container>
+
+<ng-template #mobile>
+  <ion-content>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+        <app-home [showButtons]="false"></app-home>
+      </ion-slide>
+      <ion-slide>
+        <app-about></app-about>
+      </ion-slide>
+      <ion-slide>
+        <app-features></app-features>
+      </ion-slide>
+      <ion-slide>
+        <div class="slide-content">
+          <h2>Ready to start?</h2>
+          <div class="button-container">
+            <ion-button class="button-container__login" routerLink="/account/login"
+              >Login</ion-button
+            >
+            <ion-button class="button-container__register" routerLink="/account/register">
+              Sign Up
+            </ion-button>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-content>
+</ng-template>

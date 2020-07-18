@@ -1,0 +1,6 @@
+site_name: Practicality
+nav:
+  - Home: index.md
+  - About: about.md
+  - Backend: backend/index.md
+  - Frontend: frontend/index.md

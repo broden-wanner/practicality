@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Notes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="notes-container">
+    <ion-list class="notes-container__list">
+      <ion-item
+        *ngFor="let note of notes | async"
+        [routerLink]="['/notes/', note.id]"
+        button
+        detail
+      >
+        <ion-label>{{ note.dateCreated | date: 'EEEE, MMMM d, y' }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

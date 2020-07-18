@@ -1,0 +1,14 @@
+.notes-container {
+  display: flex;
+  height: 100%;
+
+  &__list {
+    width: 100%;
+    min-width: 100px;
+    border: var(--border);
+
+    .active-note {
+      --background: var(--ion-color-light);
+    }
+  }
+}
