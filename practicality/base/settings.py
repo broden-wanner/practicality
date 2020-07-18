@@ -105,14 +105,7 @@ TOKEN_TTL = datetime.timedelta(hours=10)
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-if ENV_ROLE == 'development':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-elif ENV_ROLE == 'production':
+if ENV_ROLE == 'production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -121,6 +114,13 @@ elif ENV_ROLE == 'production':
             'PASSWORD': get_env_variable('DB_PASSWORD'),
             'HOST': 'localhost',
             'PORT': '',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 
