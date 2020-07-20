@@ -16,6 +16,7 @@ export class SubtaskListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    // Subscribe to the new subtask event
     this.newSubtaskEvent.subscribe(() => this.makeSubtask());
   }
 

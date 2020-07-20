@@ -1,3 +1,14 @@
+.subtask-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
 .subtask-date {
   text-align: right;
+}
+
+.subtask-input-name,
+.subtask-input-datetime {
+  font-size: 14px;
 }

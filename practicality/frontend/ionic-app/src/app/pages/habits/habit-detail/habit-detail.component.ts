@@ -49,7 +49,12 @@ export class HabitDetailComponent implements OnInit {
     if (this.isNewHabit) {
       const habit = Habit.fromJson(this.habitForm.value);
       this.habitService.createHabit(habit).subscribe(
-        () => this.router.navigate(['/habits']),
+        () => {
+          // Clear the fields
+          this.habitForm.setValue({ name: '' });
+          // Navigate to the main habits page
+          this.router.navigate(['/habits']);
+        },
         (error) => {
           console.error(error);
           this.toastService.sendMessage('Could not create habit', 'danger', 2000);
@@ -58,7 +63,12 @@ export class HabitDetailComponent implements OnInit {
     } else {
       this.habit.name = this.habitForm.value.name;
       this.habitService.updateHabit(this.habit).subscribe(
-        () => this.router.navigate(['/habits']),
+        () => {
+          // Clear the fields
+          this.habitForm.setValue({ name: '' });
+          // Navigate to the main habits page
+          this.router.navigate(['/habits']);
+        },
         () => {
           this.toastService.sendMessage('Could not update habit', 'danger', 2000);
         }

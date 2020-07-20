@@ -55,7 +55,34 @@ export class ProjectService {
   public createProject(project: Project): Observable<Project> {
     return this.http.post<Project>(`${environment.api}/projects/`, project).pipe(
       map(Project.fromJson),
-      tap((p) => this.projectsArray.push(p))
+      tap((newProject: Project) => {
+        // Add the new projects to the internal projects array
+        if (newProject) {
+          this.projectsArray.push(newProject);
+          this.projects.next(this.projectsArray);
+        }
+      })
+    );
+  }
+
+  /**
+   * Delete a project
+   * @param habit The habit to delete
+   */
+  public deleteProject(project: Project): Observable<any> {
+    return this.http.delete(`${environment.api}/projects/${project.id}/`).pipe(
+      tap(() => {
+        let projectCopy = [...this.projectsArray];
+        for (let i = 0; i < projectCopy.length; i++) {
+          const p = projectCopy[i];
+          if (p.id === project.id) {
+            projectCopy.splice(i, 1);
+            this.projectsArray = projectCopy;
+            this.projects.next(projectCopy);
+            break;
+          }
+        }
+      })
     );
   }
 

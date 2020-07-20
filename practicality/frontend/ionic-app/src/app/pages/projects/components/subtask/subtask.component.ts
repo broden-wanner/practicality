@@ -51,8 +51,10 @@ export class SubtaskComponent implements OnInit {
     // Must be on a timeout to wait for the input to appear
     setTimeout(() => {
       const nameInput = this.elementRef.nativeElement.querySelector('input[type="text"]');
-      nameInput.focus();
-    }, 100);
+      if (nameInput) {
+        nameInput.focus();
+      }
+    }, 300);
   }
 
   /**
@@ -62,7 +64,6 @@ export class SubtaskComponent implements OnInit {
   public saveSubtask(): void {
     this.subtask.editing = false;
     this.subtask.setEqualTo(Subtask.fromJson(this.subtaskForm.value));
-
     // If this subtask is for a new project, only add it to the subtask array of the project
     if (this.forNewProject) {
       return;
@@ -72,7 +73,9 @@ export class SubtaskComponent implements OnInit {
     if (this.subtask.id) {
       // Simply update the subtask
       this.projectService.updateSubtask(this.subtask).subscribe(
-        () => {},
+        () => {
+          this.toastService.sendMessage('Updated subtask', 'success', 2000);
+        },
         (error) => {
           console.error(error);
           this.toastService.sendMessage('Error while updating', 'danger');
@@ -83,6 +86,7 @@ export class SubtaskComponent implements OnInit {
       this.projectService.createSubtask(this.subtask).subscribe(
         (newSubtask) => {
           this.subtask.setEqualTo(newSubtask);
+          this.toastService.sendMessage('Created subtask', 'success', 2000);
         },
         (error) => {
           console.error(error);

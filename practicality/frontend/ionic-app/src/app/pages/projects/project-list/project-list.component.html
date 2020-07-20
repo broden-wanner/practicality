@@ -5,4 +5,10 @@
   <ion-list class="list-container">
     <app-project *ngFor="let project of projects | async" [project]="project"></app-project>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/projects/new">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

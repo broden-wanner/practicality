@@ -53,6 +53,10 @@ export class HabitService {
    * @returns {Observable<Habit>} - an observable of the new habit created
    */
   public createHabit(habit: Habit): Observable<Habit> {
+    // Remove the habit's last_done attribute if empty string
+    if (!habit.last_done) {
+      delete habit.last_done;
+    }
     return this.http.post<Habit>(`${environment.api}/habits/`, habit).pipe(
       map(Habit.fromJson),
       tap((newHabit: Habit) => {
@@ -70,6 +74,11 @@ export class HabitService {
    * @returns {Observable<Habit>} - an observable of the new habit created
    */
   public updateHabit(habit: Habit): Observable<Habit> {
+    // Remove the habit's last_done attribute if empty string
+    if (!habit.last_done) {
+      delete habit.last_done;
+    }
+    // Update the habit
     return this.http.put<Habit>(`${environment.api}/habits/${habit.id}/`, habit).pipe(
       map(Habit.fromJson),
       tap((updatedHabit) => {

@@ -5,6 +5,7 @@ import { Project } from 'src/app/shared/models/project';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../shared/services/toast.service';
+import { Subtask } from 'src/app/shared/models/subtask';
 
 @Component({
   selector: 'app-project-detail',
@@ -36,11 +37,13 @@ export class ProjectDetailComponent implements OnInit {
    */
   public onSubmit(): void {
     const project = Project.fromJson(this.projectForm.value);
+    project.subtasks = this.project.subtasks.map(Subtask.fromJson);
+    console.log(project);
     this.projectService.createProject(project).subscribe(
       (success) => this.router.navigate(['/projects']),
       (error) => {
         console.error(error);
-        this.toastService.sendMessage('Could not create project', 'danger');
+        this.toastService.sendMessage('Could not create project', 'danger', 2000);
       }
     );
   }

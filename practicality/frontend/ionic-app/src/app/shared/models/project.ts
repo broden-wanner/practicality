@@ -39,8 +39,8 @@ export class Project {
   }
 
   /**
-   * Returns the progress of the project based on the number of subtasks completed.
-   * Gives a value between 0 and 1
+   * Returns the progress of the project based on the number of subtasks completed.   *
+   * @returns percert of subtasks completed
    */
   public get progress(): number {
     if (this.subtasks.length === 0) {
@@ -48,6 +48,15 @@ export class Project {
     }
     const completed = this.subtasks.filter((s) => s.completed).length;
     return completed / this.subtasks.length;
+  }
+
+  /**
+   * Return a string of the fractional progress of the subtasks
+   * @returns string of fraction progress
+   */
+  public get progressAsFraction(): string {
+    const completed = this.subtasks.filter((s) => s.completed).length;
+    return `${completed} / ${this.subtasks.length}`;
   }
 
   /**
@@ -68,6 +77,10 @@ export class Project {
     return project;
   }
 
+  /**
+   * Equals method that simply compares project id's
+   * @param project
+   */
   equals(project: Project): boolean {
     return project.id === this.id;
   }
