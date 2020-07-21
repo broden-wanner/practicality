@@ -1,6 +1,6 @@
 # Practicality
 
-[![Build Status](https://travis-ci.com/broden-wanner/practicality.svg?branch=master)](https://travis-ci.com/broden-wanner/practicality)
+![build](https://github.com/broden-wanner/practicality/workflows/Deploy%20to%20Digital%20Ocean/badge.svg)
 
 A practice app designed for the organized classical musician. Allows you
 to create daily notes on practice sessions and store them in cloud. There
