@@ -26,7 +26,7 @@ echo -e "Ran migrations\n\n"
 
 # Build frontend
 cd frontend/ionic-app 
-npm install -g @ionic/cli
+npm install -g @ionic/cli # Ensure ionic is installed
 npm install
 ionic build --prod
 cd ../..
