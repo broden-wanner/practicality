@@ -28,6 +28,7 @@ jobs:
         env:
           ENV_ROLE: testing
           SECRET_KEY:  ${{ secrets.SECRET_KEY }} 
+          HOST: * 
         run: |
           python practicality/manage.py check
           python practicality/manage.py test
