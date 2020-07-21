@@ -14,6 +14,7 @@ source venv/bin/activate
 echo "Activated the virtual environment"
 
 # Ensure all dependencies are installed
+pip3 install --upgrade pip
 pip3 install -r requirements.txt
 echo "Installed dependencies"
 
@@ -24,11 +25,14 @@ python3 manage.py migrate
 echo "Ran migrations"
 
 # Build frontend
-cd frontend/app && ionic build --prod
-echo "Built frontend"
+cd frontend/ionic-app 
+npm i 
+ionic build --prod
+cd ../..
+echo -e "Built frontend\n\n"
 
 # Collect static files
-python manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
 echo "Collected static files"
 
 # Restart the server
