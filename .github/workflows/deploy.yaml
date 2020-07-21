@@ -47,5 +47,6 @@ jobs:
         env:
           HOST_IP: ${{ secrets.HOST_IP }}
           HOST_USERNAME:  ${{ secrets.HOST_USERNAME }} 
+          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
         run: |
           source scripts/perform-deploy.sh
