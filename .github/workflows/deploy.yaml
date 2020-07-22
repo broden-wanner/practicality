@@ -29,11 +29,12 @@ jobs:
         run: |
           cd practicality/frontend/ionic-app
           ionic build --prod
-      - name: Upload frontend folder
+          zip -r ionic-dist.zip www
+      - name: Upload frontend dist
         uses: actions/upload-artifact@v1
         with:
           name: ionic-dist
-          path: practicality/frontend/ionic-app/www
+          path: practicality/frontend/ionic-app/ionic-dist.zip
 
   build-backend:
     runs-on: ubuntu-latest
@@ -82,5 +83,4 @@ jobs:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
         run: |
           ls
-          ls ionic-dist
           source scripts/perform-deploy-from-github.sh

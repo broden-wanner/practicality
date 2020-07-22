@@ -1,5 +1,4 @@
 # Copy the frontend to the server
-zip -r ionic-dist.zip www
 scp -i $SSH_KEY_PATH ionic-dist.zip $HOST_USERNAME@$HOST_IP:~/practicality/practicality/frontend/ionic-app
 
 # ssh into the machine and execute the actual deploy script
