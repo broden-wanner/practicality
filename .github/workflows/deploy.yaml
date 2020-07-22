@@ -25,13 +25,14 @@ jobs:
           cd practicality/frontend/ionic-app
           npm i @ionic/cli -g
           npm install
-          ls
       - name: Build frontend
         run: |
-          ls
+          cd practicality/frontend/ionic-app
           ionic build --prod
       - name: Upload frontend folder
         uses: actions/upload-artifact@v1
+        run: |
+          cd practicality/frontend/ionic-app
         with:
           name: ionic-dist
           path: www
@@ -42,7 +43,7 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.6]
-
+    needs: build-frontend
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
