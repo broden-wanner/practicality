@@ -31,11 +31,9 @@ jobs:
           ionic build --prod
       - name: Upload frontend folder
         uses: actions/upload-artifact@v1
-        run: |
-          cd practicality/frontend/ionic-app
         with:
           name: ionic-dist
-          path: www
+          path: practicality/frontend/ionic-app/www
 
   build-backend:
     runs-on: ubuntu-latest
