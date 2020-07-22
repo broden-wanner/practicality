@@ -25,8 +25,10 @@ jobs:
           cd practicality/frontend/ionic-app
           npm i @ionic/cli -g
           npm install
+          ls
       - name: Build frontend
         run: |
+          ls
           ionic build --prod
       - name: Upload frontend folder
         uses: actions/upload-artifact@v1
