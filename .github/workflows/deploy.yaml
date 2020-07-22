@@ -1,4 +1,4 @@
-name: Deploy to Digital Ocean
+name: deploy-web
 
 on:
   push:
@@ -7,7 +7,34 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |
+          cd practicality/frontend/ionic-app
+          npm i @ionic/cli -g
+          npm install
+      - name: Build frontend
+        run: |
+          ionic build --prod
+      - name: Upload frontend folder
+        uses: actions/upload-artifact@v1
+        with:
+          name: ionic-dist
+          path: www
+
+  build-backend:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -27,8 +54,8 @@ jobs:
       - name: Run Tests
         env:
           ENV_ROLE: testing
-          SECRET_KEY:  ${{ secrets.SECRET_KEY }} 
-          HOST: "*" 
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          HOST: '*'
         run: |
           python practicality/manage.py check
           python practicality/manage.py test
@@ -43,10 +70,14 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+      - name: Get frontend dist
+        uses: actions/download-artifact@v1
+        with:
+          name: ionic-dist
       - name: Deploy
         env:
           HOST_IP: ${{ secrets.HOST_IP }}
-          HOST_USERNAME:  ${{ secrets.HOST_USERNAME }} 
+          HOST_USERNAME: ${{ secrets.HOST_USERNAME }}
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
         run: |
           source scripts/perform-deploy.sh

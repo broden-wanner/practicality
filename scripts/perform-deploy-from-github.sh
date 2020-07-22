@@ -1,5 +1,10 @@
-#!/usr/bin/bash
+# Copy the frontend to the server
+zip -r ionic-dist.zip www
+scp -i $SSH_KEY_PATH ionic-dist.zip $HOST_USERNAME@$HOST_IP:~/practicality/practicality/frontend/ionic-app
 
+# ssh into the machine and execute the actual deploy script
+ssh -i $SSH_KEY_PATH $HOST_USERNAME@$HOST_IP '
+# Start in the project root
 cd ~/practicality
 
 # Pull the new source code
@@ -24,13 +29,10 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 echo -e "Ran migrations\n\n"
 
-# Build frontend
-cd frontend/ionic-app 
-npm install -g @ionic/cli # Ensure ionic is installed
-npm install
-ionic build --prod
+# Unzip the frontend dist folder
+cd frontend/ionic-app
+unzip ionic-dist.zip
 cd ../..
-echo -e "Built frontend\n\n"
 
 # Collect static files
 python3 manage.py collectstatic --noinput
@@ -39,3 +41,4 @@ echo -e "Collected static files\n\n"
 # Restart the server
 source ../scripts/restart-server.sh
 echo "Server restarted"
+'
