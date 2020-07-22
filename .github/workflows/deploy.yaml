@@ -83,4 +83,6 @@ jobs:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
         run: |
           ls
+          ls ionic-dist
+          mv ./ionic-dist/ionic-dist.zip ./ionic-dist.zip
           source scripts/perform-deploy-from-github.sh
