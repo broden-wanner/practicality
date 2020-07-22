@@ -1,4 +1,4 @@
-name: deploy-web
+name: deployment-web
 
 on:
   push:
@@ -82,4 +82,5 @@ jobs:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
         run: |
           ls
+          ls ionic-dist
           source scripts/perform-deploy-from-github.sh
