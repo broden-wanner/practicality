@@ -32,6 +32,7 @@ echo -e "Ran migrations\n\n"
 cd frontend/ionic-app
 unzip ionic-dist.zip
 cd ../..
+echo -e "Unzipped frontend folder\n\n"
 
 # Collect static files
 python3 manage.py collectstatic --noinput
