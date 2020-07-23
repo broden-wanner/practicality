@@ -33,6 +33,19 @@ class ProjectSerializer(serializers.ModelSerializer):
             Subtask.objects.create(project=project, **subtask)
         return project
 
+    def update(self, instance, validated_data):
+        subtask_data = validated_data.pop('subtasks')
+        Project.objects.filter(pk=instance.pk).update(**validated_data, user=self.context['request'].user)
+        project = Project.objects.get(pk=instance.pk)
+        for subtask in subtask_data:
+            subtask.pop('project')
+            try:
+                subtask_obj = Subtask.objects.get(project=project, name=subtask['name'])
+                Subtask.objects.filter(pk=subtask_obj.pk).update(**subtask)
+            except Subtask.DoesNotExist:
+                Subtask.objects.create(project=project, **subtask)
+        return project
+
 
 class HabitSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)

@@ -1,5 +1,6 @@
 .project-form-container {
   padding: var(--default-padding);
+  margin: var(--default-margin);
 
   .create-button-container {
     display: flex;
@@ -10,5 +11,14 @@
     ion-button {
       width: max-content;
     }
+  }
+
+  .subtask-label {
+    padding-top: 30px;
+    padding-bottom: inherit;
+  }
+
+  .subtask-add-button {
+    margin-top: 38px;
   }
 }

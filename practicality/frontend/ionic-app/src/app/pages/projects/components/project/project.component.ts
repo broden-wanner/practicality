@@ -4,6 +4,7 @@ import { Project } from '../../../../shared/models/project';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { ProjectService } from '../../project.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -18,7 +19,8 @@ export class ProjectComponent implements OnInit {
     public actionSheetController: ActionSheetController,
     public alertController: AlertController,
     private toastService: ToastService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router
   ) {
     this.newSubtaskEvent = new Subject<void>();
   }
@@ -43,7 +45,9 @@ export class ProjectComponent implements OnInit {
         {
           text: 'Edit',
           icon: 'pencil',
-          handler: this.editProject,
+          handler: () => {
+            this.editProject();
+          },
         },
       ],
     });
@@ -86,7 +90,9 @@ export class ProjectComponent implements OnInit {
   /**
    * Enter the edit project page
    */
-  public editProject(): void {}
+  public editProject(): void {
+    this.router.navigate([`/projects/${this.project.id}`]);
+  }
 
   /**
    * Delete the project using the project service

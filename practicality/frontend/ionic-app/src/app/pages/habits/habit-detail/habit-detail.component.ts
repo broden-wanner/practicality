@@ -32,11 +32,18 @@ export class HabitDetailComponent implements OnInit {
     }
     // Get the habit
     this.route.paramMap.subscribe((params) => {
-      this.habitService.getHabit(Number(params.get('habitId'))).subscribe((habit: Habit) => {
-        this.habit = habit;
-        // Set the form body and subscribe to note changes
-        this.habitForm.setValue({ name: this.habit.name });
-      });
+      this.habitService.getHabit(Number(params.get('habitId'))).subscribe(
+        (habit: Habit) => {
+          this.habit = habit;
+          // Set the form body and subscribe to note changes
+          this.habitForm.setValue({ name: this.habit.name });
+        },
+        (error) => {
+          // Show toast for error
+          console.error(error);
+          this.toastService.sendMessage('Project not found', 'danger', 2000);
+        }
+      );
     });
   }
 

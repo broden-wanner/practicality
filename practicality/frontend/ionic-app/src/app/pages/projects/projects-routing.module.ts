@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProjectsPage } from './projects.page';
-
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
@@ -10,18 +8,13 @@ import { AuthGuard } from 'src/app/core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    component: ProjectsPage,
+    component: ProjectListComponent,
     canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        component: ProjectListComponent,
-      },
-      {
-        path: ':title',
-        component: ProjectDetailComponent,
-      },
-    ],
+  },
+  {
+    path: ':projectId',
+    component: ProjectDetailComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

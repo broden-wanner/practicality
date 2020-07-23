@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ProjectService {
   private projects = new BehaviorSubject<Project[]>(new Array<Project>());
   private projectsArray: Array<Project>;
+  public allProjectsLoaded = false;
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +24,7 @@ export class ProjectService {
       (projects) => {
         this.projectsArray = projects.map(Project.fromJson);
         this.projects.next(this.projectsArray);
+        this.allProjectsLoaded = true;
       },
       (error) => {
         this.projects.error(error);
@@ -60,6 +62,32 @@ export class ProjectService {
         if (newProject) {
           this.projectsArray.push(newProject);
           this.projects.next(this.projectsArray);
+        }
+      })
+    );
+  }
+
+  /**
+   * Makes a PUT request to the api to update a project
+   * Once successful, the project is updated locally
+   * @param project - the new project object
+   * @returns {Observable<Project>} - an observable of the new project created
+   */
+  public updateProject(project: Project): Observable<Project> {
+    // Update the project
+    return this.http.put<Project>(`${environment.api}/projects/${project.id}/`, project).pipe(
+      map(Project.fromJson),
+      tap((updatedProject) => {
+        let projectsCopy = [...this.projects.value];
+        for (let i = 0; i < projectsCopy.length; i++) {
+          const h = projectsCopy[i];
+          if (h.id === updatedProject.id) {
+            // Take out the old value and input the new one
+            projectsCopy.splice(i, 1);
+            this.projects.next([...projectsCopy, updatedProject]);
+            this.projectsArray = this.projects.value;
+            break;
+          }
         }
       })
     );
