@@ -30,7 +30,8 @@ echo -e "Ran migrations\n\n"
 
 # Unzip the frontend dist folder
 cd frontend/ionic-app
-unzip ionic-dist.zip
+unzip -o ionic-dist.zip
+rm ionic-dist.zip
 cd ../..
 echo -e "Unzipped frontend folder\n\n"
 
