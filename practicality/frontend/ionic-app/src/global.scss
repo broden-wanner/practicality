@@ -38,3 +38,9 @@
   --padding-end: 2px;
   padding: 0 5px;
 }
+
+/* Particles js styles */
+#particles-js canvas {
+  position: absolute;
+  z-index: 0;
+}

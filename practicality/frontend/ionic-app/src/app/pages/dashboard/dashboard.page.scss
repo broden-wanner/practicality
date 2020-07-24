@@ -3,10 +3,10 @@
 }
 
 .dashboard {
-  background-image: url('/assets/music-background.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  // background-image: url('/assets/music-background.jpg');
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -15,5 +15,9 @@
     padding: 20px;
     width: 100%;
     max-width: var(--max-content-width);
+
+    ion-card {
+      z-index: 10;
+    }
   }
 }

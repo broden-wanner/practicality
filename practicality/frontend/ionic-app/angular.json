@@ -38,7 +38,10 @@
               { "input": "src/theme/variables.scss" },
               { "input": "src/global.scss" }
             ],
-            "scripts": ["./node_modules/moment/min/moment.min.js"]
+            "scripts": [
+              "./node_modules/moment/min/moment.min.js",
+              "./node_modules/particles.js/particles.js"
+            ]
           },
           "configurations": {
             "production": {
