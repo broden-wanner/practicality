@@ -24,7 +24,7 @@
 
   <ion-content>
     <div class="landing">
-      <ion-router-outlet class="landing__content"></ion-router-outlet>
+      <ion-router-outlet class="landing__content" id="particles-js"></ion-router-outlet>
     </div>
   </ion-content>
 </ng-container>
@@ -32,7 +32,7 @@
 <ng-template #mobile>
   <ion-content>
     <ion-slides pager="true" [options]="slideOpts">
-      <ion-slide>
+      <ion-slide id="particles-js">
         <app-home [showButtons]="false"></app-home>
       </ion-slide>
       <ion-slide>

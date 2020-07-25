@@ -1,5 +1,12 @@
 .main-card {
-  --background: white;
+  z-index: 1000000;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .button-container {
@@ -9,5 +16,14 @@
 
   &__login {
     margin-right: 10px;
+  }
+}
+
+.logo {
+  margin-top: 12px;
+
+  &::part(image) {
+    max-height: 40px;
+    max-width: 40px;
   }
 }

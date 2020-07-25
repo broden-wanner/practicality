@@ -1,5 +1,7 @@
+declare var particlesJS: any;
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { particleConfig } from 'src/app/shared/particles-config';
 
 @Component({
   selector: 'app-landing',
@@ -18,5 +20,10 @@ export class LandingPage implements OnInit {
   ngOnInit() {
     // If the width is above 768px (md), set to desktop
     this.isDesktop = this.platform.width() > 768;
+  }
+
+  ionViewDidEnter() {
+    // Set up the particle packgroud
+    particlesJS('particles-js', particleConfig);
   }
 }

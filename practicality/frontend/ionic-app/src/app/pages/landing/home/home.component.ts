@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   @Input() showButtons = true;
+  isDesktop = false;
 
-  constructor() {}
+  constructor(private platform: Platform) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // If the width is above 768px (md), set to desktop
+    this.isDesktop = this.platform.width() > 768;
+  }
 }
