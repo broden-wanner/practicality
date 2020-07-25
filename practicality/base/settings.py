@@ -99,7 +99,7 @@ REST_FRAMEWORK = {
 
 # Setting for django rest knox which sets the ttl of the tokens
 
-TOKEN_TTL = datetime.timedelta(hours=10)
+TOKEN_TTL = datetime.timedelta(days=30)
 
 
 # Database

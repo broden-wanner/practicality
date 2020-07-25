@@ -9,8 +9,8 @@ import { particleConfig } from 'src/app/shared/particles-config';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
-  isDesktop = false;
-  slideOpts = {
+  public isDesktop = false;
+  public slideOpts = {
     initialSlide: 0,
     speed: 400,
   };

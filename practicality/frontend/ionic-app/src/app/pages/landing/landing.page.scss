@@ -1,16 +1,5 @@
 .landing {
   height: 100%;
-
-  &__content {
-    max-width: 1045px;
-    margin: auto;
-    padding: 0 20px;
-  }
-}
-
-/* Without setting height the slides will take up the height of the slide's content */
-ion-slides {
-  height: 100%;
 }
 
 .button-container {
@@ -20,5 +9,50 @@ ion-slides {
 
   &__login {
     margin-right: 10px;
+  }
+}
+
+.logo {
+  padding-left: 20px;
+
+  &::part(image) {
+    max-height: 30px;
+    max-width: 30px;
+  }
+}
+
+/* Slides styles */
+
+ion-slides {
+  height: 100%;
+}
+
+.slides ion-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  .title {
+    font-size: 50px;
+  }
+
+  .text-content {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+
+.logo-img {
+  &::part(image) {
+    max-width: 80px;
+    max-height: 80px;
+  }
+}
+
+.content-img {
+  &::part(image) {
+    max-height: 60px;
   }
 }

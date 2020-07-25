@@ -1,37 +1,12 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap');
+
 /** Ionic CSS Variables **/
 :root {
-  /** Theme variables **/
-  --ion-background-color: #fdf5e8;
-  --ion-background-color-rgb: 253, 245, 232;
-
-  --ion-toolbar-background: #fdf5e8;
-  --ion-toolbar-background-rgb: 253, 245, 232;
-
-  --ion-text-color: #000000;
-  --ion-text-color-rgb: 0, 0, 0;
-
-  --ion-color-step-50: #f0e9dc;
-  --ion-color-step-100: #e4ddd1;
-  --ion-color-step-150: #d7d0c5;
-  --ion-color-step-200: #cac4ba;
-  --ion-color-step-250: #beb8ae;
-  --ion-color-step-300: #b1aca2;
-  --ion-color-step-350: #a49f97;
-  --ion-color-step-400: #98938b;
-  --ion-color-step-450: #8b8780;
-  --ion-color-step-500: #7f7b74;
-  --ion-color-step-550: #726e68;
-  --ion-color-step-600: #65625d;
-  --ion-color-step-650: #595651;
-  --ion-color-step-700: #4c4a46;
-  --ion-color-step-750: #3f3d3a;
-  --ion-color-step-800: #33312e;
-  --ion-color-step-850: #262523;
-  --ion-color-step-900: #191817;
-  --ion-color-step-950: #0d0c0c;
+  /** Application variables **/
+  --ion-font-family: 'Comfortaa', cursive;
 
   /** Color variables **/
   --ion-color-primary: #fdb130;

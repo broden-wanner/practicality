@@ -1,17 +1,63 @@
-<ion-card class="main-card">
-  <ion-card-header class="main-card__header">
-    <ion-card-title>Practicality</ion-card-title>
-    <ion-img class="logo" src="/assets/logo-rounded.png" *ngIf="!isDesktop"></ion-img>
-  </ion-card-header>
-  <ion-card-content>
-    <p>
-      Designed for the classical musician with organization in mind.
-    </p>
-    <div *ngIf="showButtons" class="button-container">
-      <ion-button class="button-container__login" routerLink="/account/login">Login</ion-button>
-      <ion-button class="button-container__signup" routerLink="/account/register"
-        >Sign Up</ion-button
-      >
-    </div>
-  </ion-card-content>
-</ion-card>
+<div class="container">
+  <ion-card class="main-card">
+    <ion-card-content>
+      <ion-text color="dark">
+        <h1 class="title">practicality</h1>
+      </ion-text>
+      <ion-text color="medium">
+        <h2 class="subtitle">
+          Designed for the classical musician with organization in mind.
+        </h2>
+      </ion-text>
+
+      <ion-grid>
+        <ion-row class="content-row">
+          <ion-col size="2">
+            <ion-img class="content-img" src="/assets/logo-rounded.png"></ion-img>
+          </ion-col>
+          <ion-col size="10" class="text-col">
+            <p class="text-content">
+              Practicality is a yapa (yet another practice app) but for the short- and long-term. It
+              encourages you to practice everyday and keep notes on your progress. You can keep
+              track of your projects in a sensible and stepwise manner while also keeping up with
+              your daily practice habits.
+            </p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="content-row">
+          <ion-col size="10" class="text-col">
+            <p class="text-content">
+              Notes are the main place for you to track your progress. You can write about any of
+              what you practiced, see your project progress, and track how often you do your daily
+              habits.
+            </p>
+          </ion-col>
+          <ion-col size="2" class="img-col">
+            <ion-img class="content-img" src="/assets/practicality-notes.png"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row class="content-row">
+          <ion-col size="2" class="img-col">
+            <ion-img class="content-img" src="/assets/practicality-projects.png"></ion-img>
+          </ion-col>
+          <ion-col size="10" class="text-col">
+            <p class="text-content">
+              Projects are where you can outline the steps needed to master a piece or technique.
+              Add steps, set due dates, and add reminders.
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-text color="medium">
+        <h2 class="subtitle start-text">Ready to start?</h2>
+      </ion-text>
+      <div *ngIf="showButtons" class="button-container">
+        <ion-button class="button-container__login" routerLink="/account/login">Login</ion-button>
+        <ion-button class="button-container__signup" routerLink="/account/register"
+          >Sign Up</ion-button
+        >
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>

@@ -1,16 +1,14 @@
 <ng-container *ngIf="isDesktop; else mobile">
   <ion-header>
     <ion-toolbar>
-      <ion-title slot="start">Practicality</ion-title>
+      <ion-img slot="start" class="logo" src="/assets/logo-rounded.png"></ion-img>
+      <ion-title slot="start"> practicality</ion-title>
       <ion-buttons slot="end">
         <ion-button routerLink="/">
           Home
         </ion-button>
         <ion-button routerLink="/about">
           About
-        </ion-button>
-        <ion-button routerLink="/features">
-          Features
         </ion-button>
         <ion-button routerLink="/account/login">
           Login
@@ -24,22 +22,38 @@
 
   <ion-content>
     <div class="landing">
-      <ion-router-outlet class="landing__content" id="particles-js"></ion-router-outlet>
+      <ion-router-outlet id="particles-js"></ion-router-outlet>
     </div>
   </ion-content>
 </ng-container>
 
 <ng-template #mobile>
   <ion-content>
-    <ion-slides pager="true" [options]="slideOpts">
+    <ion-slides class="slides" pager="true" [options]="slideOpts">
       <ion-slide id="particles-js">
-        <app-home [showButtons]="false"></app-home>
+        <ion-text color="dark">
+          <h1 class="title">practicality</h1>
+        </ion-text>
+        <ion-text color="medium">
+          <p class="subtitle">
+            Designed for the classical musician with organization in mind.
+          </p>
+        </ion-text>
+        <ion-img class="logo-img" src="/assets/logo-rounded.png"></ion-img>
       </ion-slide>
       <ion-slide>
-        <app-about></app-about>
+        <p class="text-content">
+          Notes are the main place for you to track your progress. You can write about any of what
+          you practiced, see your project progress, and track how often you do your daily habits.
+        </p>
+        <ion-img class="content-img" src="/assets/practicality-notes.png"></ion-img>
       </ion-slide>
       <ion-slide>
-        <app-features></app-features>
+        <p class="text-content">
+          Projects are where you can outline the steps needed to master a piece or technique. Add
+          steps, set due dates, and add reminders.
+        </p>
+        <ion-img class="content-img" src="/assets/practicality-projects.png"></ion-img>
       </ion-slide>
       <ion-slide>
         <div class="slide-content">
