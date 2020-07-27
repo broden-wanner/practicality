@@ -15,7 +15,10 @@ export class HabitListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.habitsService.loadAllHabits();
-    this.habitsService.getAllHabits().subscribe((habits) => (this.habits = habits));
+    this.habitsService.getAllHabits().subscribe((habits) => {
+      this.habits = habits;
+      console.log('habits on habit page loaded', habits);
+    });
   }
 
   public get doneHabits(): Habit[] {

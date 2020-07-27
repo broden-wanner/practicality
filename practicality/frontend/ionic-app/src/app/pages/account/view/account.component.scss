@@ -1,3 +1,11 @@
+.page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .account-container {
   margin: var(--default-margin);
+  max-width: 700px;
+  width: 100%;
 }

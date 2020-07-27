@@ -14,25 +14,35 @@
         <ion-row>
           <ion-col>
             <ion-card>
-              <ion-card-header>
-                <ion-card-title>Projects</ion-card-title>
+              <ion-card-header class="info-header">
+                <ion-card-title>projects</ion-card-title>
+                <ion-button fill="clear" routerLink="/projects">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </ion-button>
               </ion-card-header>
               <ion-card-content>
-                <p>
-                  Current projects...
-                </p>
+                <ion-list>
+                  <ion-item *ngFor="let project of projects | async">
+                    {{ project.title }}
+                  </ion-item>
+                </ion-list>
               </ion-card-content>
             </ion-card>
           </ion-col>
           <ion-col>
             <ion-card>
-              <ion-card-header>
-                <ion-card-title>Notes</ion-card-title>
+              <ion-card-header class="info-header">
+                <ion-card-title>notes</ion-card-title>
+                <ion-button fill="clear" routerLink="/notes">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </ion-button>
               </ion-card-header>
               <ion-card-content>
-                <p>
-                  Current notes...
-                </p>
+                <ion-list>
+                  <ion-item *ngFor="let note of notes | async">
+                    {{ note.dateCreated | date: 'EEEE, MMMM d, y' }}
+                  </ion-item>
+                </ion-list>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -40,20 +50,29 @@
         <ion-row>
           <ion-col>
             <ion-card>
-              <ion-card-header>
-                <ion-card-title>Habits</ion-card-title>
+              <ion-card-header class="info-header">
+                <ion-card-title>habits</ion-card-title>
+                <ion-button fill="clear" routerLink="/habits">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </ion-button>
               </ion-card-header>
               <ion-card-content>
-                <p>
-                  Current habits...
-                </p>
+                <ion-list>
+                  <ion-item *ngFor="let habit of habits | async">
+                    <p>{{ habit.name }}</p>
+                    <ion-icon *ngIf="habit.doneToday()" slot="end" name="checkmark"></ion-icon>
+                  </ion-item>
+                </ion-list>
               </ion-card-content>
             </ion-card>
           </ion-col>
           <ion-col>
             <ion-card>
-              <ion-card-header>
-                <ion-card-title>Listening</ion-card-title>
+              <ion-card-header class="info-header">
+                <ion-card-title>listening</ion-card-title>
+                <ion-button fill="clear" routerLink="/listening">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </ion-button>
               </ion-card-header>
               <ion-card-content>
                 <p>

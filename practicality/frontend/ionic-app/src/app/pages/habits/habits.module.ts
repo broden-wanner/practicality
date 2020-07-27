@@ -8,9 +8,11 @@ import { HabitsPageRoutingModule } from './habits-routing.module';
 import { HabitListComponent } from './habit-list/habit-list.component';
 import { HabitDetailComponent } from './habit-detail/habit-detail.component';
 import { HabitComponent } from './habit/habit.component';
+import { HabitService } from './habit.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, HabitsPageRoutingModule],
   declarations: [HabitComponent, HabitListComponent, HabitDetailComponent],
+  providers: [HabitService],
 })
 export class HabitsPageModule {}

@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotesService {
   private notes = new BehaviorSubject<Note[]>(new Array<Note>());
@@ -18,20 +18,26 @@ export class NotesService {
    */
   public loadAllNotes(): void {
     this.http.get<Note[]>(`${environment.api}/notes/`).subscribe(
-      notes => {
+      (notes) => {
         this.notes.next(notes.map(Note.fromJson));
       },
-      error => {
+      (error) => {
         this.notes.error(error);
       }
     );
   }
 
   /**
-   * Retuns an observable of all the available notes
+   * Retuns an observable of all the available notes. Sorts the list by date.
    */
   public getAllNotes(): Observable<Note[]> {
-    return this.notes.asObservable();
+    return this.notes.asObservable().pipe(
+      map((notes) => {
+        // Sort in reverse order of date
+        notes.sort((a, b) => Number(new Date(b.dateCreated)) - Number(new Date(a.dateCreated)));
+        return notes;
+      })
+    );
   }
 
   /**

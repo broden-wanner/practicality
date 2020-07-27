@@ -11,6 +11,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class HabitService {
   private habits = new BehaviorSubject<Habit[]>(new Array<Habit>());
+  private allHabitsLoaded = false;
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +22,8 @@ export class HabitService {
     this.http.get<Habit[]>(`${environment.api}/habits/`).subscribe(
       (habits) => {
         this.habits.next(habits.map(Habit.fromJson));
+        this.allHabitsLoaded = true;
+        console.log('all habits loaded', habits);
       },
       (error) => {
         this.habits.error(error);
@@ -34,7 +37,12 @@ export class HabitService {
    * @returns {Observable<Habit[]>} - The observable of the habits
    */
   public getAllHabits(): Observable<Habit[]> {
-    return this.habits.asObservable();
+    return this.habits.asObservable().pipe(
+      tap((habits) => {
+        console.log('habits gotten from service', habits);
+        console.log('habits gotten from service value', this.habits.value);
+      })
+    );
   }
 
   /**
