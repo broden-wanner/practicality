@@ -1,6 +1,15 @@
 site_name: Practicality
 nav:
   - Home: index.md
+  - Features: features.md
   - About: about.md
-  - Backend: backend/index.md
-  - Frontend: frontend/index.md
+  - Backend: backend.md
+  - Frontend: frontend.md
+  - Contributing: contributing.md
+theme:
+  name: 'material'
+  favicon: img/favicon.ico
+  logo: img/favicon.ico
+  palette:
+    primary: black
+    accent: amber

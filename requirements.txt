@@ -12,6 +12,9 @@ djangorestframework==3.11.0
 gunicorn==20.0.4
 importlib-metadata==0.19
 kombu==4.6.7
+mkdocs==1.1.2
+mkdocs-material==5.5.0
+mkdocs-material-extensions==1.0
 more-itertools==7.2.0
 psycopg2-binary==2.8.4
 pycparser==2.19
