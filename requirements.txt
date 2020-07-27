@@ -28,7 +28,6 @@ mkdocs-material-extensions==1.0
 mkdocstrings==0.12.2
 more-itertools==7.2.0
 nltk==3.5
-pkg-resources==0.0.0
 psycopg2-binary==2.8.5
 pycodestyle==2.6.0
 pycparser==2.20
