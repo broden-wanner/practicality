@@ -3,6 +3,7 @@ digitalocean/
 
 ### Custom ignores ###
 practicality/static
+docs/site
 
 ### NPM ignores ###
 *~

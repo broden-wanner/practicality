@@ -39,6 +39,10 @@ echo -e "Unzipped frontend folder\n\n"
 python3 manage.py collectstatic --noinput
 echo -e "Collected static files\n\n"
 
+# Make the docs
+cd ../docs
+mkdocs build
+
 # Restart the server
 source ../scripts/restart-server.sh
 echo "Server restarted"
