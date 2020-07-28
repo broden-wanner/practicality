@@ -23,7 +23,6 @@ export class HabitService {
       (habits) => {
         this.habits.next(habits.map(Habit.fromJson));
         this.allHabitsLoaded = true;
-        console.log('all habits loaded', habits);
       },
       (error) => {
         this.habits.error(error);
@@ -37,12 +36,7 @@ export class HabitService {
    * @returns {Observable<Habit[]>} - The observable of the habits
    */
   public getAllHabits(): Observable<Habit[]> {
-    return this.habits.asObservable().pipe(
-      tap((habits) => {
-        console.log('habits gotten from service', habits);
-        console.log('habits gotten from service value', this.habits.value);
-      })
-    );
+    return this.habits.asObservable();
   }
 
   /**
@@ -70,7 +64,6 @@ export class HabitService {
       tap((newHabit: Habit) => {
         const currentHabits = this.habits.value;
         this.habits.next([...currentHabits, newHabit]);
-        console.log(this.habits.value);
       })
     );
   }

@@ -48,7 +48,6 @@ export class DashboardPage implements OnInit {
     this.habits = this.habitService.getAllHabits().pipe(
       map((habits) => {
         const len = Math.min(habits.length, this.listLength);
-        console.log('habits in dasboard', habits);
         return habits.splice(0, len);
       })
     );

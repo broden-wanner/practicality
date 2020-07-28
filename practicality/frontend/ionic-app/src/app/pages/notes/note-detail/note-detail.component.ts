@@ -59,7 +59,6 @@ export class NoteDetailComponent implements OnInit {
         debounceTime(1000)
       )
       .subscribe((val: any) => {
-        console.log(val);
         this.note.body = val.body ? val.body : '';
         this.notesService.updateNote(this.note).subscribe(() => {
           this.saved = true;

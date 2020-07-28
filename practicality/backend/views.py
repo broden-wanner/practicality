@@ -9,8 +9,10 @@ from .serializers import *
 
 class NoteViewSet(viewsets.ModelViewSet):
     """
-    A simple ViewSet for viewing and editing notes.
+    A simple ViewSet for viewing and editing notes. Subclasses DRF's 
+    `ModelViewSet`.
     """
+
     serializer_class = NoteSerializer
     # Users must be authenticated to view their notes
     permission_classes = [permissions.IsAuthenticated]
@@ -20,13 +22,15 @@ class NoteViewSet(viewsets.ModelViewSet):
         Override the get_queryset method to return only those
         notes which belong to the user
         """
+
         return Note.objects.filter(user=self.request.user)
 
     def list(self, request):
         """
         Override the list method to create a new note
-        if there has not been one created for this day
+        if there has not been one created for this day.
         """
+
         queryset = Note.objects.filter(user=self.request.user)
         try:
             latest_note = queryset.latest('date_created')
@@ -45,8 +49,10 @@ class NoteViewSet(viewsets.ModelViewSet):
 
 class ProjectViewSet(viewsets.ModelViewSet):
     """
-    A viewset for viewing and editing projects
+    A viewset for viewing and editing projects. Subclasses
+    DRF's `ModelViewSet`.
     """
+
     serializer_class = ProjectSerializer
     # Users must be authenticated to view their projects
     permission_classes = [permissions.IsAuthenticated]
@@ -61,8 +67,10 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
 class SubtaskViewSet(viewsets.ModelViewSet):
     """
-    A viewset for viewing and editing subtasks on projects
+    A viewset for viewing and editing subtasks on projects. Subcalasses
+    DRF's `ModelViewSet`.
     """
+
     serializer_class = SubtaskSerializer
     # Users must be authenticated to view subtasks
     permission_classes = [permissions.IsAuthenticated]
@@ -77,8 +85,10 @@ class SubtaskViewSet(viewsets.ModelViewSet):
 
 class HabitViewSet(viewsets.ModelViewSet):
     """
-    A viewset for viewing and editing habits
+    A viewset for viewing and editing habits. Subclasses DRF's
+    `ModelViewSet`.
     """
+
     serializer_class = HabitSerializer
     # Users must be authenticated to view subtasks
     permission_classes = [permissions.IsAuthenticated]
