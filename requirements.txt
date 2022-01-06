@@ -4,7 +4,7 @@ asn1crypto==0.24.0
 autopep8==1.5.3
 beautifulsoup4==4.9.1
 billiard==3.6.3.0
-celery==4.4.6
+celery==5.2.2
 cffi==1.14.1
 click==7.1.2
 cryptography==3.3.2
